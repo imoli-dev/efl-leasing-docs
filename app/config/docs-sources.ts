@@ -1,8 +1,11 @@
+/** Names of the page-type content collections defined in content.config.ts. */
+export type DocCollection = 'docs' | 'sdk_docs' | 'wordpress_docs'
+
 export interface DocSource {
   id: string
   label: string
   prefix: string
-  collection: string
+  collection: DocCollection
   to: string
   icon: string
   editBaseUrl?: string
@@ -13,23 +16,42 @@ export interface DocSource {
 export const docSources: DocSource[] = [
   {
     id: 'docs',
-    label: 'Docs',
+    label: 'Documentation',
     prefix: '/docs',
     collection: 'docs',
     to: '/docs',
     icon: 'i-lucide-book-open',
-    indexPath: '/docs/getting-started'
+    indexPath: '/docs/about'
   },
   {
     id: 'sdk',
-    label: 'SDK',
+    label: 'PHP SDK',
     prefix: '/sdk',
     collection: 'sdk_docs',
     to: '/sdk',
     icon: 'i-lucide-package',
-    editBaseUrl: 'https://github.com/imoli-pl/efl-leasing-sdk/edit/master/docs',
+    editBaseUrl: 'https://github.com/imoli-dev/efl-leasing-sdk/edit/master/docs',
     indexPath: '/sdk'
+  },
+  {
+    id: 'wordpress-plugin',
+    label: 'WordPress / WooCommerce Plugin',
+    prefix: '/wordpress-plugin',
+    collection: 'wordpress_docs',
+    to: '/wordpress-plugin',
+    icon: 'i-simple-icons-wordpress',
+    editBaseUrl: 'https://github.com/imoli-dev/efl-leasing-wp-plugin/edit/master/docs',
+    indexPath: '/wordpress-plugin'
   }
+  // {
+  //   id: 'shoper-app',
+  //   label: 'Shoper App',
+  //   prefix: '/shoper-app',
+  //   collection: 'shoper_docs',
+  //   to: '/shoper-app',
+  //   icon: 'i-lucide-shopping-bag',
+  //   indexPath: '/shoper-app'
+  // }
 ]
 
 export const prefixedDocSources = docSources
@@ -47,7 +69,7 @@ export function getDocSourceByPath(path: string): DocSource | undefined {
 }
 
 /** Unwraps root nav item when it matches the prefix (e.g. "Sdk" wrapping all sections). Nuxt Content uses `path`, not `_path`. */
-export function unwrapRootNavigation<T extends { _path?: string; path?: string; children?: unknown[] }>(
+export function unwrapRootNavigation<T extends { _path?: string, path?: string, children?: unknown[] }>(
   items: T[] | undefined,
   urlPrefix: string
 ): T[] | undefined {

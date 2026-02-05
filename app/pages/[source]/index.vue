@@ -36,15 +36,18 @@ function mapNavigationPaths(
   contentPathPrefix?: string
 ): ContentNavigationItem[] | undefined {
   if (!items) return items
-  return items.map((item) => ({
-    ...item,
-    _path: item._path
-      ? (contentPathPrefix ? item._path.replace(contentPathPrefix, urlPrefix) : (item._path === '/' ? urlPrefix : urlPrefix + item._path))
-      : item._path,
-    children: item.children
-      ? mapNavigationPaths(item.children as ContentNavigationItem[], urlPrefix, contentPathPrefix)
-      : item.children
-  }))
+  return items.map((item) => {
+    const itemPath = (item as { _path?: string })._path
+    return {
+      ...item,
+      _path: itemPath
+        ? (contentPathPrefix ? itemPath.replace(contentPathPrefix, urlPrefix) : (itemPath === '/' ? urlPrefix : urlPrefix + itemPath))
+        : itemPath,
+      children: item.children
+        ? mapNavigationPaths(item.children as ContentNavigationItem[], urlPrefix, contentPathPrefix)
+        : item.children
+    }
+  })
 }
 
 const navigation = computed<ContentNavigationItem[] | undefined>(() => {
@@ -91,7 +94,7 @@ const headline = computed(() => findPageHeadline(navigation?.value, route.path))
 defineOgImageComponent('Docs', { headline: headline.value })
 
 const links = computed(() => {
-  const list: Array<{ icon: string; label: string; to: string; target: string }> = []
+  const list: Array<{ icon: string, label: string, to: string, target: string }> = []
   if (source.editBaseUrl) {
     const p = page?.value?.path ?? ''
     const pathSuffix = p === '/' || p === source.prefix
@@ -106,6 +109,8 @@ const links = computed(() => {
   }
   return list
 })
+
+const frontmatterLinks = computed(() => (page.value as { links?: Array<Record<string, unknown>> })?.links ?? [])
 </script>
 
 <template>
@@ -117,7 +122,7 @@ const links = computed(() => {
     >
       <template #links>
         <UButton
-          v-for="(link, index) in page.links"
+          v-for="(link, index) in frontmatterLinks"
           :key="index"
           v-bind="link"
         />

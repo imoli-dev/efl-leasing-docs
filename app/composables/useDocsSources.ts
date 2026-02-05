@@ -3,8 +3,7 @@ import {
   prefixedDocSources,
   getDocSourceById,
   getDocSourceByPath,
-  getDocSourceByPrefix,
-  type DocSource
+  getDocSourceByPrefix
 } from '~/config/docs-sources'
 
 export function useDocsSources() {

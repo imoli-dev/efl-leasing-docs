@@ -1,7 +1,7 @@
 ---
 seo:
-  title: EFL Leasing – SDK & Ecommerce Integrations
-  description: Integrate leasing and financing into your ecommerce store with EFL Leasing SDK and plugins for PrestaShop, WordPress, and more.
+  title: EFL Leasing – PHP SDK & Ecommerce Integrations
+  description: Integrate leasing and financing into your ecommerce store with EFL Leasing PHP SDK and plugins for PrestaShop, WordPress, and more.
 ---
 
 ::u-page-hero{class="dark:bg-gradient-to-b from-neutral-900 to-neutral-950"}
@@ -13,10 +13,10 @@ reverse: false
 :hero-background
 
 #title
-[EFL Leasing]{.text-primary} – SDK & Ecommerce Plugins
+[EFL Leasing]{.text-primary} – PHP SDK & Ecommerce Plugins
 
 #description
-Integrate leasing and financing into your online store. Use our SDK for custom integrations or choose a ready-made plugin for your ecommerce platform.
+Integrate leasing and financing into your online store. Use our PHP SDK for custom integrations or choose a ready-made plugin for your ecommerce platform.
 
 #links
   :::u-button
@@ -36,7 +36,7 @@ Integrate leasing and financing into your online store. Use our SDK for custom i
   size: xl
   icon: i-lucide-package
   ---
-  SDK Documentation
+  PHP SDK Documentation
   :::
 
 #default
@@ -73,7 +73,10 @@ Integrate leasing and financing into your online store. Use our SDK for custom i
 
 ::u-page-section{class="dark:bg-neutral-950"}
 #title
-What we offer
+How this documentation is organised
+
+#description
+This site focuses on two main areas: the PHP SDK for custom integrations and ready‑made ecommerce plugins for specific platforms. Use the sections below to understand how the pieces fit together.
 
 #features
   :::u-page-feature
@@ -81,10 +84,10 @@ What we offer
   icon: i-lucide-package
   ---
   #title
-  SDK
+  PHP SDK and API
 
   #description
-  PHP SDK for custom integrations. Full API reference, authentication, and identity verification flows.
+  Learn how to authenticate, create offers and applications, handle redirects and work with the EFL Leasing API using the PHP SDK.
   :::
 
   :::u-page-feature
@@ -92,10 +95,10 @@ What we offer
   icon: i-lucide-shopping-cart
   ---
   #title
-  Ecommerce Plugins
+  Ecommerce integrations
 
   #description
-  Ready-made plugins for popular platforms. Add leasing as a payment option in minutes.
+  See how to install, configure and update official plugins for PrestaShop, WooCommerce and Shoper, and how they use the same SDK under the hood.
   :::
 
   :::u-page-feature
@@ -103,49 +106,70 @@ What we offer
   icon: i-lucide-book-open
   ---
   #title
-  Documentation
+  Guides and examples
 
   #description
-  Guides, API reference, and examples. Everything you need to integrate EFL Leasing into your project.
+  Follow step‑by‑step guides, environment setup instructions and code examples that show common integration scenarios in real applications.
   :::
 ::
 
 ::u-page-section{class="dark:bg-neutral-950"}
+---
+orientation: horizontal
+---
 #title
 Platform support
+
+#description
+You can start with a ready-made ecommerce integration or build a custom flow on top of our PHP SDK. Pick your platform below to open the dedicated documentation.
 
 #features
   :::u-page-feature
   ---
   icon: i-simple-icons-prestashop
+  to: /prestashop-module
   ---
   #title
-  PrestaShop
+  PrestaShop Module
 
   #description
-  Native PrestaShop module for leasing integration. Coming soon.
+  Native PrestaShop module that adds EFL Leasing as a payment method in your checkout and product pages. Configure limits, terms and display settings directly from your back office.
   :::
 
   :::u-page-feature
   ---
   icon: i-simple-icons-wordpress
+  to: /wordpress-plugin
   ---
   #title
-  WordPress / WooCommerce
+  WordPress / WooCommerce Plugin
 
   #description
-  WordPress plugin for WooCommerce stores. Coming soon.
+  WordPress plugin for WooCommerce that lets customers apply for leasing directly from the cart or product page. Supports multiple product types, checkout widgets and custom themes.
+  :::
+
+  :::u-page-feature
+  ---
+  icon: i-lucide-shopping-bag
+  to: /shoper-app
+  ---
+  #title
+  Shoper App
+
+  #description
+  Native Shoper application that integrates EFL Leasing with your store’s checkout and product catalogue. Enable EFL Leasing in a few clicks and manage configuration from the Shoper.
   :::
 
   :::u-page-feature
   ---
   icon: i-lucide-code
+  to: /sdk
   ---
   #title
   Custom Integration
 
   #description
-  Use our SDK to build integrations for any platform or custom ecommerce solution.
+  Use our PHP SDK to build integrations for any platform or custom ecommerce solution – from bespoke storefronts to marketplace backends and internal sales tools.
   :::
 ::
 
@@ -156,12 +180,12 @@ Platform support
     - label: Browse documentation
       to: '/docs'
       trailingIcon: i-lucide-arrow-right
-    - label: SDK API Reference
+    - label: PHP SDK API Reference
       to: '/sdk'
       variant: subtle
       icon: i-lucide-package
   title: Ready to integrate?
-  description: Explore our documentation and SDK to add leasing to your ecommerce store.
+  description: Explore our documentation and PHP SDK to add leasing to your ecommerce store.
   class: dark:bg-neutral-950
   ---
 

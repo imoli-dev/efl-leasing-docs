@@ -5,7 +5,19 @@ const { footer } = useAppConfig()
 <template>
   <UFooter>
     <template #left>
-      {{ footer.credits }}
+      <span>{{ footer.credits }}</span>
+      <span class="mx-1">•</span>
+      <span class="text-sm text-muted">
+        Created by
+        <NuxtLink
+          :to="footer.author?.url || 'https://imoli.dev'"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="font-medium hover:underline"
+        >
+          {{ footer.author?.name || 'Imoli' }}
+        </NuxtLink>
+      </span>
     </template>
 
     <template #right>

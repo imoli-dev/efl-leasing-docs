@@ -1,4 +1,7 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+
+const siteUrl = process.env.NUXT_PUBLIC_SITE_URL || 'https://efl-leasing.imoli.pl'
+
 export default defineNuxtConfig({
   modules: [
     '@nuxt/eslint',
@@ -33,6 +36,12 @@ export default defineNuxtConfig({
     }
   },
 
+  runtimeConfig: {
+    public: {
+      siteUrl
+    }
+  },
+
   experimental: {
     asyncContext: true
   },
@@ -64,32 +73,60 @@ export default defineNuxtConfig({
   },
 
   llms: {
-    domain: 'https://docs-template.nuxt.dev/',
-    title: 'Nuxt Docs Template',
-    description: 'A template for building documentation with Nuxt UI and Nuxt Content.',
+    domain: siteUrl,
+    title: 'EFL Leasing Docs',
+    description: 'Documentation for EFL Leasing integrations, including the PHP SDK.',
     full: {
-      title: 'Nuxt Docs Template - Full Documentation',
-      description: 'This is the full documentation for the Nuxt Docs Template.'
+      title: 'EFL Leasing Docs - Full Documentation',
+      description: 'Full documentation for EFL Leasing integrations and the PHP SDK.'
     },
     sections: [
       {
-        title: 'Getting Started',
-        contentCollection: 'docs',
+        title: 'SDK Getting Started',
+        contentCollection: 'sdk_docs',
         contentFilters: [
-          { field: 'path', operator: 'LIKE', value: '/getting-started%' }
+          { field: 'path', operator: 'LIKE', value: '/sdk/getting-started%' }
         ]
       },
       {
-        title: 'Essentials',
-        contentCollection: 'docs',
+        title: 'SDK Installation',
+        contentCollection: 'sdk_docs',
         contentFilters: [
-          { field: 'path', operator: 'LIKE', value: '/essentials%' }
+          { field: 'path', operator: 'LIKE', value: '/sdk/installation%' }
+        ]
+      },
+      {
+        title: 'SDK Quickstart',
+        contentCollection: 'sdk_docs',
+        contentFilters: [
+          { field: 'path', operator: 'LIKE', value: '/sdk/quickstart%' }
+        ]
+      },
+      {
+        title: 'SDK API Reference',
+        contentCollection: 'sdk_docs',
+        contentFilters: [
+          { field: 'path', operator: 'LIKE', value: '/sdk/api%' }
+        ]
+      },
+      {
+        title: 'SDK Guides',
+        contentCollection: 'sdk_docs',
+        contentFilters: [
+          { field: 'path', operator: 'LIKE', value: '/sdk/guides%' }
+        ]
+      },
+      {
+        title: 'WordPress / WooCommerce Plugin',
+        contentCollection: 'wordpress_docs',
+        contentFilters: [
+          { field: 'path', operator: 'LIKE', value: '/wordpress-plugin%' }
         ]
       }
     ]
   },
 
   mcp: {
-    name: 'Docs template'
+    name: 'EFL Leasing Docs'
   }
 })

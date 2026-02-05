@@ -11,25 +11,28 @@ function mapNavigationPaths(
   contentPathPrefix?: string
 ): ContentNavigationItem[] | undefined {
   if (!items) return items
-  return items.map((item) => ({
-    ...item,
-    _path: item._path
-      ? (contentPathPrefix
-          ? item._path.replace(contentPathPrefix, urlPrefix)
-          : (item._path === '/' ? urlPrefix : urlPrefix + item._path))
-      : item._path,
-    children: item.children
-      ? mapNavigationPaths(item.children as ContentNavigationItem[], urlPrefix, contentPathPrefix)
-      : item.children
-  }))
+  return items.map((item) => {
+    const itemPath = (item as { _path?: string })._path
+    return {
+      ...item,
+      _path: itemPath
+        ? (contentPathPrefix
+            ? itemPath.replace(contentPathPrefix, urlPrefix)
+            : (itemPath === '/' ? urlPrefix : urlPrefix + itemPath))
+        : itemPath,
+      children: item.children
+        ? mapNavigationPaths(item.children as ContentNavigationItem[], urlPrefix, contentPathPrefix)
+        : item.children
+    }
+  })
 }
 
 const navCollections = docSources.map(s => s.collection)
 const { data: navByCollection } = await useAsyncData(
   'nav-all',
   () => Promise.all(
-    navCollections.map(async (col) => ({ col, nav: await queryCollectionNavigation(col) }))
-  ).then((results) => Object.fromEntries(results.map(({ col, nav }) => [col, nav])))
+    navCollections.map(async col => ({ col, nav: await queryCollectionNavigation(col) }))
+  ).then(results => Object.fromEntries(results.map(({ col, nav }) => [col, nav])))
 )
 
 const navigation = computed<ContentNavigationItem[] | undefined>(() => {
@@ -47,7 +50,7 @@ const navigation = computed<ContentNavigationItem[] | undefined>(() => {
 })
 
 function ensurePathOnNavItems(items: ContentNavigationItem[]): ContentNavigationItem[] {
-  return items.map((item) => ({
+  return items.map(item => ({
     ...item,
     path: (item as { path?: string }).path ?? (item as { _path?: string })._path ?? '',
     children: item.children
@@ -82,7 +85,7 @@ const { data: files } = useLazyAsyncData(
     const allDocs = await Promise.all(
       docSources.map(async (s) => {
         const items = await queryCollectionSearchSections(s.collection)
-        return items.map((file: { path?: string; id?: string } & Record<string, unknown>) => {
+        return items.map((file: { path?: string, id?: string } & Record<string, unknown>) => {
           const filePath = file.path ?? file.id ?? ''
           const mappedPath = s.contentPathPrefix
             ? filePath.replace(s.contentPathPrefix, s.prefix)

@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import type { NuxtError } from '#app'
 
+import { docSources } from '~/config/docs-sources'
+
 defineProps<{
   error: NuxtError
 }>()
@@ -15,8 +17,6 @@ useSeoMeta({
   title: 'Page not found',
   description: 'We are sorry but this page could not be found.'
 })
-
-import { docSources } from '~/config/docs-sources'
 
 const { data: files } = useLazyAsyncData(
   'search',

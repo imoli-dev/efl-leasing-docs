@@ -20,15 +20,15 @@ export default defineContentConfig({
       type: 'page',
       source: {
         repository: {
-          url: 'https://github.com/imoli-pl/efl-leasing-sdk',
+          url: 'https://github.com/imoli-dev/efl-leasing-sdk',
           branch: 'master',
           auth: {
             username: 'x-access-token',
-            token: process.env.GITHUB_TOKEN,
-          },
+            token: process.env.GITHUB_TOKEN
+          }
         },
         include: 'docs/**',
-        prefix: '/sdk',
+        prefix: '/sdk'
       },
       schema: z.object({
         links: z.array(z.object({
@@ -38,6 +38,70 @@ export default defineContentConfig({
           target: z.string().optional()
         })).optional()
       })
+    }),
+
+    // prestashop_docs: defineCollection({
+    //   type: 'page',
+    //   source: {
+    //     repository: {
+    //       url: 'https://github.com/imoli-dev/efl-leasing-prestashop-module',
+    //       branch: 'master',
+    //       auth: {
+    //         username: 'x-access-token',
+    //         token: process.env.GITHUB_TOKEN,
+    //       },
+    //     },
+    //     include: 'docs/**',
+    //     prefix: '/prestashop-module',
+    //   }
+    // }),
+
+    // prestashop17_docs: defineCollection({
+    //   type: 'page',
+    //   source: {
+    //     repository: {
+    //       url: 'https://github.com/imoli-dev/efl-leasing-prestashop17-module',
+    //       branch: 'master',
+    //       auth: {
+    //         username: 'x-access-token',
+    //         token: process.env.GITHUB_TOKEN,
+    //       },
+    //     },
+    //     include: 'docs/**',
+    //     prefix: '/prestashop17-module',
+    //   }
+    // }),
+
+    wordpress_docs: defineCollection({
+      type: 'page',
+      source: {
+        repository: {
+          url: 'https://github.com/imoli-dev/efl-leasing-wp-plugin',
+          branch: 'master',
+          auth: {
+            username: 'x-access-token',
+            token: process.env.GITHUB_TOKEN
+          }
+        },
+        include: 'docs/**',
+        prefix: '/wordpress-plugin'
+      }
     })
+
+    // shopper_docs: defineCollection({
+    //   type: 'page',
+    //   source: {
+    //     repository: {
+    //       url: 'https://github.com/imoli-dev/efl-leasing-shoper-app',
+    //       branch: 'master',
+    //       auth: {
+    //         username: 'x-access-token',
+    //         token: process.env.GITHUB_TOKEN,
+    //       },
+    //     },
+    //     include: 'docs/**',
+    //     prefix: '/shoper-app',
+    //   }
+    // }),
   }
 })

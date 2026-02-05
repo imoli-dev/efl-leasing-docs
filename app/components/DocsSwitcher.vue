@@ -10,7 +10,7 @@ const dropdownItems = computed(() =>
     label: s.label,
     to: s.to,
     icon: s.icon,
-    color: currentSource.value?.id === s.id ? 'primary' : undefined
+    color: (currentSource.value?.id === s.id ? 'primary' : undefined) as 'primary' | undefined
   }))
 )
 </script>

@@ -11,5 +11,5 @@ defineOptions({
     loading="eager"
     fetchpriority="high"
     v-bind="$attrs"
-  />
+  >
 </template>
