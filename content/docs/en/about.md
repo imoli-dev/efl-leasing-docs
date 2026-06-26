@@ -25,20 +25,11 @@ In both cases you can configure test credentials, verify the flow in a sandbox e
 ## Documentation areas
 
 ::card-group
-  <!-- :::card
-  ---
-  icon: i-lucide-book-open
-  title: Docs
-  to: /docs
-  ---
-  General documentation, concepts and high‑level integration guides.
-  ::: -->
-
   :::card
   ---
   icon: i-lucide-package
   title: PHP SDK
-  to: /sdk
+  to: /en/sdk
   ---
   Detailed PHP SDK documentation with installation instructions, API reference and advanced topics.
   :::
@@ -47,7 +38,7 @@ In both cases you can configure test credentials, verify the flow in a sandbox e
   ---
   icon: i-simple-icons-prestashop
   title: PrestaShop Module
-  to: /prestashop-module
+  to: /en/prestashop-module
   ---
   PrestaShop module documentation with installation, configuration and usage guides.
   :::
@@ -56,7 +47,7 @@ In both cases you can configure test credentials, verify the flow in a sandbox e
   ---
   icon: i-simple-icons-wordpress
   title: WordPress / WooCommerce Plugin
-  to: /wordpress-plugin
+  to: /en/wordpress-plugin
   ---
   WordPress / WooCommerce plugin documentation with setup, configuration and best practices.
   :::
@@ -65,7 +56,7 @@ In both cases you can configure test credentials, verify the flow in a sandbox e
   ---
   icon: i-lucide-shopping-bag
   title: Shoper App
-  to: /shoper-app
+  to: /en/shoper-app
   ---
   Shoper application documentation with installation steps, configuration and usage examples.
   :::
@@ -75,13 +66,12 @@ In both cases you can configure test credentials, verify the flow in a sandbox e
 
 You can integrate EFL Leasing with your store using one of the official plugins:
 
-- **PrestaShop module** – installable from your PrestaShop back office, adds EFL Leasing as a payment option and on product pages. [Read the PrestaShop guide](/prestashop).
-- **WordPress / WooCommerce plugin** – ready‑to‑use plugin for WooCommerce‑based shops. [Read the WooCommerce guide](/wordpress-plugin).
-- **Shoper application** – integration for Shoper‑based stores that exposes EFL Leasing in checkout and product views. [Read the Shoper guide](/shoper).
+- **PrestaShop module** – installable from your PrestaShop back office, adds EFL Leasing as a payment option and on product pages.
+- **WordPress / WooCommerce plugin** – ready‑to‑use plugin for WooCommerce‑based shops.
+- **Shoper application** – integration for Shoper‑based stores that exposes EFL Leasing in checkout and product views.
 
 All ecommerce integrations are built on top of the same **EFL Leasing PHP SDK**. This means:
 
 - the leasing decision and application flow is consistent across platforms
 - you can mix plugins with custom SDK integrations in other channels
 - monitoring and logging follow the same patterns in your backend systems
-

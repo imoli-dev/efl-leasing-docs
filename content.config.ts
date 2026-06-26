@@ -1,107 +1,101 @@
 import { defineContentConfig, defineCollection, z } from '@nuxt/content'
 
+const githubAuth = {
+  username: 'x-access-token',
+  token: process.env.GITHUB_TOKEN
+}
+
+const sdkLinksSchema = z.object({
+  links: z.array(z.object({
+    label: z.string(),
+    icon: z.string(),
+    to: z.string(),
+    target: z.string().optional()
+  })).optional()
+})
+
 export default defineContentConfig({
   collections: {
-    landing: defineCollection({
+    landing_en: defineCollection({
       type: 'page',
-      source: 'index.md'
+      source: 'en/index.md'
     }),
 
-    docs: defineCollection({
+    landing_pl: defineCollection({
+      type: 'page',
+      source: 'pl/index.md'
+    }),
+
+    docs_en: defineCollection({
       type: 'page',
       source: {
-        include: '**',
-        exclude: ['index.md'],
+        include: 'docs/en/**',
         prefix: '/docs'
       }
     }),
 
-    sdk_docs: defineCollection({
+    docs_pl: defineCollection({
+      type: 'page',
+      source: {
+        include: 'docs/pl/**',
+        prefix: '/docs'
+      }
+    }),
+
+    sdk_docs_en: defineCollection({
       type: 'page',
       source: {
         repository: {
           url: 'https://github.com/imoli-dev/efl-leasing-sdk',
           branch: 'master',
-          auth: {
-            username: 'x-access-token',
-            token: process.env.GITHUB_TOKEN
-          }
+          auth: githubAuth
         },
         include: 'docs/**',
+        exclude: 'docs/pl/**',
         prefix: '/sdk'
       },
-      schema: z.object({
-        links: z.array(z.object({
-          label: z.string(),
-          icon: z.string(),
-          to: z.string(),
-          target: z.string().optional()
-        })).optional()
-      })
+      schema: sdkLinksSchema
     }),
 
-    // prestashop_docs: defineCollection({
-    //   type: 'page',
-    //   source: {
-    //     repository: {
-    //       url: 'https://github.com/imoli-dev/efl-leasing-prestashop-module',
-    //       branch: 'master',
-    //       auth: {
-    //         username: 'x-access-token',
-    //         token: process.env.GITHUB_TOKEN,
-    //       },
-    //     },
-    //     include: 'docs/**',
-    //     prefix: '/prestashop-module',
-    //   }
-    // }),
+    sdk_docs_pl: defineCollection({
+      type: 'page',
+      source: {
+        repository: {
+          url: 'https://github.com/imoli-dev/efl-leasing-sdk',
+          branch: 'master',
+          auth: githubAuth
+        },
+        include: 'docs/pl/**',
+        prefix: '/sdk'
+      },
+      schema: sdkLinksSchema
+    }),
 
-    // prestashop17_docs: defineCollection({
-    //   type: 'page',
-    //   source: {
-    //     repository: {
-    //       url: 'https://github.com/imoli-dev/efl-leasing-prestashop17-module',
-    //       branch: 'master',
-    //       auth: {
-    //         username: 'x-access-token',
-    //         token: process.env.GITHUB_TOKEN,
-    //       },
-    //     },
-    //     include: 'docs/**',
-    //     prefix: '/prestashop17-module',
-    //   }
-    // }),
-
-    wordpress_docs: defineCollection({
+    wordpress_docs_en: defineCollection({
       type: 'page',
       source: {
         repository: {
           url: 'https://github.com/imoli-dev/efl-leasing-wp-plugin',
           branch: 'master',
-          auth: {
-            username: 'x-access-token',
-            token: process.env.GITHUB_TOKEN
-          }
+          auth: githubAuth
         },
         include: 'docs/**',
+        exclude: 'docs/pl/**',
+        prefix: '/wordpress-plugin'
+      }
+    }),
+
+    wordpress_docs_pl: defineCollection({
+      type: 'page',
+      source: {
+        repository: {
+          url: 'https://github.com/imoli-dev/efl-leasing-wp-plugin',
+          branch: 'master',
+          auth: githubAuth
+        },
+        include: 'docs/pl/**',
         prefix: '/wordpress-plugin'
       }
     })
-
-    // shopper_docs: defineCollection({
-    //   type: 'page',
-    //   source: {
-    //     repository: {
-    //       url: 'https://github.com/imoli-dev/efl-leasing-shoper-app',
-    //       branch: 'master',
-    //       auth: {
-    //         username: 'x-access-token',
-    //         token: process.env.GITHUB_TOKEN,
-    //       },
-    //     },
-    //     include: 'docs/**',
-    //     prefix: '/shoper-app',
-    //   }
-    // }),
   }
 })

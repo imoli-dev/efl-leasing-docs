@@ -58,7 +58,7 @@ export default defineAppConfig({
       }, {
         icon: 'i-lucide-package',
         label: 'SDK Documentation',
-        to: '/sdk'
+        to: '/en/sdk'
       }]
     }
   }

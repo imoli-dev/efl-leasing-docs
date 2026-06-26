@@ -51,7 +51,9 @@ export default defineNuxtConfig({
   nitro: {
     prerender: {
       routes: [
-        '/'
+        '/',
+        '/en',
+        '/pl'
       ],
       crawlLinks: true,
       autoSubfolderIndex: false,
@@ -83,42 +85,42 @@ export default defineNuxtConfig({
     sections: [
       {
         title: 'SDK Getting Started',
-        contentCollection: 'sdk_docs',
+        contentCollection: 'sdk_docs_en',
         contentFilters: [
           { field: 'path', operator: 'LIKE', value: '/sdk/getting-started%' }
         ]
       },
       {
         title: 'SDK Installation',
-        contentCollection: 'sdk_docs',
+        contentCollection: 'sdk_docs_en',
         contentFilters: [
           { field: 'path', operator: 'LIKE', value: '/sdk/installation%' }
         ]
       },
       {
         title: 'SDK Quickstart',
-        contentCollection: 'sdk_docs',
+        contentCollection: 'sdk_docs_en',
         contentFilters: [
           { field: 'path', operator: 'LIKE', value: '/sdk/quickstart%' }
         ]
       },
       {
         title: 'SDK API Reference',
-        contentCollection: 'sdk_docs',
+        contentCollection: 'sdk_docs_en',
         contentFilters: [
           { field: 'path', operator: 'LIKE', value: '/sdk/api%' }
         ]
       },
       {
         title: 'SDK Guides',
-        contentCollection: 'sdk_docs',
+        contentCollection: 'sdk_docs_en',
         contentFilters: [
           { field: 'path', operator: 'LIKE', value: '/sdk/guides%' }
         ]
       },
       {
         title: 'WordPress / WooCommerce Plugin',
-        contentCollection: 'wordpress_docs',
+        contentCollection: 'wordpress_docs_en',
         contentFilters: [
           { field: 'path', operator: 'LIKE', value: '/wordpress-plugin%' }
         ]

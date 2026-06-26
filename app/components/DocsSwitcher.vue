@@ -1,6 +1,9 @@
 <script setup lang="ts">
+import { getLocalizedSourceTo } from '~/config/docs-sources'
+
 const route = useRoute()
 const { sources, getByPath } = useDocsSources()
+const { locale } = useCurrentLocale()
 
 const currentSource = computed(() => getByPath(route.path))
 const currentLabel = computed(() => currentSource.value?.label ?? sources[0]?.label ?? 'Docs')
@@ -8,7 +11,7 @@ const currentLabel = computed(() => currentSource.value?.label ?? sources[0]?.la
 const dropdownItems = computed(() =>
   sources.map(s => ({
     label: s.label,
-    to: s.to,
+    to: getLocalizedSourceTo(s, locale.value),
     icon: s.icon,
     color: (currentSource.value?.id === s.id ? 'primary' : undefined) as 'primary' | undefined
   }))

@@ -1,15 +1,24 @@
 <script setup lang="ts">
 import type { NuxtError } from '#app'
-
-import { docSources } from '~/config/docs-sources'
+import {
+  docSources,
+  getDocSourceByPath,
+  getDocSourceCollection,
+  getLocalizedSourceTo,
+  unwrapRootNavigation
+} from '~/config/docs-sources'
+import { mapNavigationPaths } from '~/utils/doc-navigation'
 
 defineProps<{
   error: NuxtError
 }>()
 
+const route = useRoute()
+const { locale } = useCurrentLocale()
+
 useHead({
   htmlAttrs: {
-    lang: 'en'
+    lang: locale
   }
 })
 
@@ -22,15 +31,19 @@ const { data: files } = useLazyAsyncData(
   'search',
   async () => {
     const allDocs = await Promise.all(
-      docSources.map(async (s) => {
-        const items = await queryCollectionSearchSections(s.collection)
+      docSources.map(async (source) => {
+        const collection = getDocSourceCollection(source, locale.value)
+        const localizedPrefix = getLocalizedSourceTo(source, locale.value)
+        const items = await queryCollectionSearchSections(collection)
+
         return items.map((file: { path?: string } & Record<string, unknown>) => {
           const filePath = file.path ?? ''
-          const mappedPath = s.contentPathPrefix
-            ? filePath.replace(s.contentPathPrefix, s.prefix)
-            : filePath.startsWith(s.prefix)
-              ? filePath
-              : (filePath === '/' ? s.prefix : s.prefix + filePath)
+          const mappedPath = source.contentPathPrefix
+            ? filePath.replace(source.contentPathPrefix, localizedPrefix)
+            : filePath.startsWith(source.prefix)
+              ? localizedPrefix + filePath.slice(source.prefix.length)
+              : (filePath === '/' ? localizedPrefix : localizedPrefix + filePath)
+
           return {
             ...file,
             path: mappedPath
@@ -38,12 +51,28 @@ const { data: files } = useLazyAsyncData(
         })
       })
     )
+
     return allDocs.flat()
   },
-  { server: false }
+  { server: false, watch: [locale] }
 )
 
-const { data: navigation } = await useAsyncData('navigation', () => queryCollectionNavigation('docs'))
+const { data: navigation } = await useAsyncData(
+  'navigation',
+  async () => {
+    const source = getDocSourceByPath(route.path) ?? docSources[0]
+    if (!source) {
+      return []
+    }
+
+    const collection = getDocSourceCollection(source, locale.value)
+    const raw = await queryCollectionNavigation(collection)
+    const localizedPrefix = getLocalizedSourceTo(source, locale.value)
+    const mapped = mapNavigationPaths(raw, localizedPrefix, source.contentPathPrefix)
+    return unwrapRootNavigation(mapped, localizedPrefix)
+  },
+  { watch: [locale, () => route.path] }
+)
 
 provide('navigation', navigation)
 </script>
@@ -55,6 +84,8 @@ provide('navigation', navigation)
     <UError :error="error" />
 
     <AppFooter />
+
+    <LangFallbackToast />
 
     <ClientOnly>
       <LazyUContentSearch

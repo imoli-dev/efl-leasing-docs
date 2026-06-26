@@ -4,12 +4,26 @@ import type { ContentNavigationItem } from '@nuxt/content'
 const navigation = inject<Ref<ContentNavigationItem[]>>('navigation')
 
 const { header } = useAppConfig()
+const { locale } = useCurrentLocale()
+
+const headerHome = computed(() => {
+  const to = header?.to || '/'
+  if (to === '/') {
+    return `/${locale.value}`
+  }
+
+  if (to.startsWith('/') && !to.startsWith(`/${locale.value}`)) {
+    return `/${locale.value}${to}`
+  }
+
+  return to
+})
 </script>
 
 <template>
   <UHeader
     :ui="{ center: 'flex-1' }"
-    :to="header?.to || '/'"
+    :to="headerHome"
   >
     <UContentSearchButton
       v-if="header?.search"
@@ -39,7 +53,7 @@ const { header } = useAppConfig()
       #left
     >
       <div class="flex items-center gap-4">
-        <NuxtLink :to="header?.to || '/'">
+        <NuxtLink :to="headerHome">
           <AppLogo class="w-auto h-6 shrink-0" />
         </NuxtLink>
         <DocsSwitcher />
@@ -51,6 +65,8 @@ const { header } = useAppConfig()
         v-if="header?.search"
         class="lg:hidden"
       />
+
+      <LocaleSwitcher />
 
       <UColorModeButton v-if="header?.colorMode" />
 

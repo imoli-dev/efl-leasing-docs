@@ -21,7 +21,7 @@ Integrate leasing and financing into your online store. Use our PHP SDK for cust
 #links
   :::u-button
   ---
-  to: /docs
+  to: /en/docs
   size: xl
   trailing-icon: i-lucide-arrow-right
   ---
@@ -30,7 +30,7 @@ Integrate leasing and financing into your online store. Use our PHP SDK for cust
 
   :::u-button
   ---
-  to: /sdk
+  to: /en/sdk
   color: neutral
   variant: outline
   size: xl
@@ -127,7 +127,7 @@ You can start with a ready-made ecommerce integration or build a custom flow on 
   :::u-page-feature
   ---
   icon: i-simple-icons-prestashop
-  to: /prestashop-module
+  to: /en/prestashop-module
   ---
   #title
   PrestaShop Module
@@ -139,7 +139,7 @@ You can start with a ready-made ecommerce integration or build a custom flow on 
   :::u-page-feature
   ---
   icon: i-simple-icons-wordpress
-  to: /wordpress-plugin
+  to: /en/wordpress-plugin
   ---
   #title
   WordPress / WooCommerce Plugin
@@ -151,19 +151,19 @@ You can start with a ready-made ecommerce integration or build a custom flow on 
   :::u-page-feature
   ---
   icon: i-lucide-shopping-bag
-  to: /shoper-app
+  to: /en/shoper-app
   ---
   #title
   Shoper App
 
   #description
-  Native Shoper application that integrates EFL Leasing with your store’s checkout and product catalogue. Enable EFL Leasing in a few clicks and manage configuration from the Shoper.
+  Native Shoper application that integrates EFL Leasing with your store's checkout and product catalogue. Enable EFL Leasing in a few clicks and manage configuration from the Shoper.
   :::
 
   :::u-page-feature
   ---
   icon: i-lucide-code
-  to: /sdk
+  to: /en/sdk
   ---
   #title
   Custom Integration
@@ -178,10 +178,10 @@ You can start with a ready-made ecommerce integration or build a custom flow on 
   ---
   links:
     - label: Browse documentation
-      to: '/docs'
+      to: '/en/docs'
       trailingIcon: i-lucide-arrow-right
     - label: PHP SDK API Reference
-      to: '/sdk'
+      to: '/en/sdk'
       variant: subtle
       icon: i-lucide-package
   title: Ready to integrate?

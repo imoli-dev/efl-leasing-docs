@@ -2,6 +2,12 @@ import { withLeadingSlash } from 'ufo'
 import { stringify } from 'minimark/stringify'
 import { queryCollection } from '@nuxt/content/server'
 import type { Collections } from '@nuxt/content'
+import {
+  defaultLocale,
+  getDocSourceByLogicalPath,
+  getDocSourceCollection,
+  stripLocaleFromPath
+} from '../../../app/config/docs-sources'
 
 export default eventHandler(async (event) => {
   const slug = getRouterParams(event)['slug.md']
@@ -10,13 +16,18 @@ export default eventHandler(async (event) => {
   }
 
   const path = withLeadingSlash(slug.replace('.md', ''))
+  const { locale, logicalPath } = stripLocaleFromPath(path)
+  const resolvedLocale = locale ?? defaultLocale
+  const source = getDocSourceByLogicalPath(logicalPath)
+  const collection = (source
+    ? getDocSourceCollection(source, resolvedLocale)
+    : `docs_${resolvedLocale}`) as keyof Collections
 
-  const page = await queryCollection(event, 'docs' as keyof Collections).path(path).first()
+  const page = await queryCollection(event, collection).path(logicalPath).first()
   if (!page) {
     throw createError({ statusCode: 404, statusMessage: 'Page not found', fatal: true })
   }
 
-  // Add title and description to the top of the page if missing
   if (page.body.value[0]?.[0] !== 'h1') {
     page.body.value.unshift(['blockquote', {}, page.description])
     page.body.value.unshift(['h1', {}, page.title])
