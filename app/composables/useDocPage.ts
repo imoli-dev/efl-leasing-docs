@@ -1,5 +1,6 @@
 import type { Collections } from '@nuxt/content'
 import {
+  defaultLocale,
   docSources,
   getDocSourceById,
   getDocSourceCollection,
@@ -8,18 +9,46 @@ import {
   isLocale,
   stripLocaleFromPath,
   unwrapRootNavigation,
+  withLocalePath,
   type DocCollection,
   type DocSource,
   type Locale
 } from '~/config/docs-sources'
 import { mapNavigationPaths } from '~/utils/doc-navigation'
-import { getDocFallbackPath } from '~/utils/locale-switch'
+import { getDocFallbackPath, getSourceIndexFallbackPath } from '~/utils/locale-switch'
 
 async function queryDocPage(collection: DocCollection, contentPath: string) {
   return queryCollection(collection as keyof Collections).path(contentPath).first()
 }
 
 type DocPageItem = NonNullable<Awaited<ReturnType<typeof queryDocPage>>>
+
+/**
+ * Redirects to a fallback page while guaranteeing we never navigate to the current
+ * URL, which would otherwise cause an infinite refresh loop. If the only candidate
+ * is the current page, we throw a 404 instead of redirecting.
+ */
+async function redirectToFallback(targetPath: string): Promise<never> {
+  const route = useRoute()
+  const currentPath = route.path
+  let destination = targetPath
+
+  if (destination === currentPath) {
+    const { locale } = stripLocaleFromPath(currentPath)
+    destination = withLocalePath(locale ?? defaultLocale, '/')
+  }
+
+  if (destination === currentPath) {
+    throw createError({ statusCode: 404, statusMessage: 'Page not found', fatal: true })
+  }
+
+  await navigateTo({
+    path: destination,
+    query: { lang_fallback: '1' }
+  })
+
+  throw createError({ statusCode: 404, statusMessage: 'Page not found', fatal: true })
+}
 
 export function useDocPageContext(sourceId: string, locale: Locale) {
   const route = useRoute()
@@ -70,12 +99,7 @@ export async function loadDocPage(
   const page = await queryDocPage(collection, contentPath)
 
   if (!page) {
-    const fallbackPath = getDocFallbackPath(locale, contentPath)
-    await navigateTo({
-      path: fallbackPath,
-      query: { lang_fallback: '1' }
-    })
-    throw createError({ statusCode: 404, statusMessage: 'Page not found', fatal: true })
+    return redirectToFallback(getDocFallbackPath(locale, contentPath))
   }
 
   return page
@@ -91,7 +115,7 @@ export async function loadDocIndexPage(
   let page = await queryDocPage(collection, contentPath)
 
   if (!page && rawNavigation.value?.length) {
-    const firstPath = (rawNavigation.value[0] as { _path?: string })?._path
+    const firstPath = (rawNavigation.value[0] as { path?: string })?.path
     if (firstPath) {
       page = await queryDocPage(collection, firstPath)
     }
@@ -103,12 +127,7 @@ export async function loadDocIndexPage(
   }
 
   if (!page) {
-    const fallbackPath = getDocFallbackPath(locale, contentPath)
-    await navigateTo({
-      path: fallbackPath,
-      query: { lang_fallback: '1' }
-    })
-    throw createError({ statusCode: 404, statusMessage: 'Page not found', fatal: true })
+    return redirectToFallback(getSourceIndexFallbackPath(locale, source))
   }
 
   return page

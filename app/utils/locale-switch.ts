@@ -1,4 +1,4 @@
-import type { DocCollection, Locale } from '../config/docs-sources'
+import type { DocCollection, DocSource, Locale } from '../config/docs-sources'
 import {
   defaultLocale,
   docSources,
@@ -112,6 +112,20 @@ export function getDocFallbackPath(locale: Locale, logicalPath: string): string 
   }
 
   return withLocalePath(locale, '/docs')
+}
+
+/**
+ * Fallback used when a whole source has no content for the locale. It escapes the
+ * source so a source index is never redirected to itself (which causes a refresh loop).
+ * Falls back to the general docs source, or to the locale landing if the source is docs.
+ */
+export function getSourceIndexFallbackPath(locale: Locale, source: DocSource): string {
+  const docsSource = docSources[0]
+  if (docsSource && source.id !== docsSource.id) {
+    return getLocalizedIndexPath(docsSource, locale)
+  }
+
+  return withLocalePath(locale, '/')
 }
 
 export function getCurrentLocaleFromPath(path: string): Locale {
