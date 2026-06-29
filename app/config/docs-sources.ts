@@ -8,7 +8,8 @@ export const defaultLocale: Locale = 'en'
 
 export interface DocSource {
   id: string
-  label: string
+  /** Display labels per locale, shown in the docs source switcher. */
+  labels: Record<Locale, string>
   /** Logical path without locale, e.g. /sdk */
   prefix: string
   collections: Record<Locale, DocCollection>
@@ -22,7 +23,10 @@ export interface DocSource {
 export const docSources: DocSource[] = [
   {
     id: 'docs',
-    label: 'Documentation',
+    labels: {
+      en: 'Overview',
+      pl: 'Przegląd'
+    },
     prefix: '/docs',
     collections: {
       en: 'docs_en',
@@ -33,7 +37,10 @@ export const docSources: DocSource[] = [
   },
   {
     id: 'sdk',
-    label: 'PHP SDK',
+    labels: {
+      en: 'PHP SDK',
+      pl: 'PHP SDK'
+    },
     prefix: '/sdk',
     collections: {
       en: 'sdk_docs_en',
@@ -48,7 +55,10 @@ export const docSources: DocSource[] = [
   },
   {
     id: 'wordpress-plugin',
-    label: 'WordPress / WooCommerce Plugin',
+    labels: {
+      en: 'WordPress / WooCommerce Plugin',
+      pl: 'Wtyczka WordPress / WooCommerce'
+    },
     prefix: '/wordpress-plugin',
     collections: {
       en: 'wordpress_docs',
@@ -134,6 +144,10 @@ export function getDocSourceByLocalizedPath(path: string): {
 
 export function getDocSourceCollection(source: DocSource, locale: Locale): DocCollection {
   return source.collections[locale]
+}
+
+export function getLocalizedLabel(source: DocSource, locale: Locale): string {
+  return source.labels[locale] ?? source.labels[defaultLocale]
 }
 
 export function getLocalizedSourceTo(source: DocSource, locale: Locale): string {

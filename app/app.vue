@@ -4,6 +4,7 @@ import {
   docSources,
   getDocSourceByPath,
   getDocSourceCollection,
+  getLocalizedLabel,
   getLocalizedSourceTo,
   unwrapRootNavigation
 } from '~/config/docs-sources'
@@ -66,7 +67,7 @@ const searchNavigation = computed<ContentNavigationItem[]>(() => {
 
     if (unwrapped?.length) {
       groups.push({
-        title: source.label,
+        title: getLocalizedLabel(source, locale.value),
         _path: localizedPrefix,
         path: localizedPrefix,
         children: ensurePathOnNavItems(unwrapped as ContentNavigationItem[])

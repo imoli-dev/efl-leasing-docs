@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { getLocalizedSourceTo } from '~/config/docs-sources'
+import { getLocalizedLabel, getLocalizedSourceTo } from '~/config/docs-sources'
 
 withDefaults(defineProps<{ mode?: 'dropdown' | 'inline' }>(), {
   mode: 'dropdown'
@@ -10,11 +10,14 @@ const { sources, getByPath } = useDocsSources()
 const { locale } = useCurrentLocale()
 
 const currentSource = computed(() => getByPath(route.path))
-const currentLabel = computed(() => currentSource.value?.label ?? sources[0]?.label ?? 'Docs')
+const currentLabel = computed(() => {
+  const source = currentSource.value ?? sources[0]
+  return source ? getLocalizedLabel(source, locale.value) : 'Docs'
+})
 
 const dropdownItems = computed(() =>
   sources.map(s => ({
-    label: s.label,
+    label: getLocalizedLabel(s, locale.value),
     to: getLocalizedSourceTo(s, locale.value),
     icon: s.icon,
     color: (currentSource.value?.id === s.id ? 'primary' : undefined) as 'primary' | undefined
@@ -30,7 +33,7 @@ const dropdownItems = computed(() =>
     <UButton
       v-for="source in sources"
       :key="source.id"
-      :label="source.label"
+      :label="getLocalizedLabel(source, locale)"
       :to="getLocalizedSourceTo(source, locale)"
       :icon="source.icon"
       :variant="currentSource?.id === source.id ? 'soft' : 'ghost'"
