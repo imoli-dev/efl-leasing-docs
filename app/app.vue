@@ -2,7 +2,6 @@
 import type { ContentNavigationItem } from '@nuxt/content'
 import {
   docSources,
-  getCollectionsForLocale,
   getDocSourceByPath,
   getDocSourceCollection,
   getLocalizedSourceTo,
@@ -14,52 +13,51 @@ const { seo } = useAppConfig()
 const route = useRoute()
 const { locale } = useCurrentLocale()
 
-const { data: navByCollection } = await useAsyncData(
+// Key navigation by source id (locale-independent) rather than by collection
+// name. The collection name changes per locale (e.g. sdk_docs_en vs
+// sdk_docs_pl), so a collection-keyed map would miss after a client-side locale
+// switch and the sidebar would vanish until/unless the data refetched.
+const { data: navBySource } = await useAsyncData(
   'nav-all',
   async () => {
-    const collections = getCollectionsForLocale(locale.value)
     const results = await Promise.all(
-      collections.map(async col => ({ col, nav: await queryCollectionNavigation(col) }))
+      docSources.map(async source => ({
+        id: source.id,
+        nav: await queryCollectionNavigation(getDocSourceCollection(source, locale.value))
+      }))
     )
-    return Object.fromEntries(results.map(({ col, nav }) => [col, nav]))
+    return Object.fromEntries(results.map(({ id, nav }) => [id, nav]))
   },
-  { watch: [locale] }
+  {
+    watch: [locale],
+    // Only use the payload cache during hydration. Otherwise the default
+    // getCachedData would return the stale payload on a locale switch and the
+    // handler would never re-query, leaving the sidebar in the previous locale.
+    getCachedData: (key, nuxtApp) => nuxtApp.isHydrating ? nuxtApp.payload.data[key] : undefined
+  }
 )
 
 const navigation = computed<ContentNavigationItem[] | undefined>(() => {
-  const source = getDocSourceByPath(route.path)
-  if (source) {
-    const collection = getDocSourceCollection(source, locale.value)
-    const raw = navByCollection.value?.[collection]
-    if (raw) {
-      const localizedPrefix = getLocalizedSourceTo(source, locale.value)
-      const mapped = mapNavigationPaths(raw, localizedPrefix, source.prefix)
-      return unwrapRootNavigation(mapped, localizedPrefix, source.prefix)
-    }
-    return raw
-  }
-
-  const docsSource = docSources[0]
-  if (!docsSource) {
+  const source = getDocSourceByPath(route.path) ?? docSources[0]
+  if (!source) {
     return undefined
   }
 
-  const raw = navByCollection.value?.[getDocSourceCollection(docsSource, locale.value)]
+  const raw = navBySource.value?.[source.id]
   if (!raw) {
-    return raw
+    return raw as ContentNavigationItem[] | undefined
   }
 
-  const localizedPrefix = getLocalizedSourceTo(docsSource, locale.value)
-  const mapped = mapNavigationPaths(raw, localizedPrefix, docsSource.prefix)
-  return unwrapRootNavigation(mapped, localizedPrefix, docsSource.prefix)
+  const localizedPrefix = getLocalizedSourceTo(source, locale.value)
+  const mapped = mapNavigationPaths(raw, localizedPrefix, source.prefix)
+  return unwrapRootNavigation(mapped, localizedPrefix, source.prefix)
 })
 
 const searchNavigation = computed<ContentNavigationItem[]>(() => {
   const groups: ContentNavigationItem[] = []
 
   for (const source of docSources) {
-    const collection = getDocSourceCollection(source, locale.value)
-    const raw = navByCollection.value?.[collection]
+    const raw = navBySource.value?.[source.id]
     if (!raw) continue
 
     const localizedPrefix = getLocalizedSourceTo(source, locale.value)
