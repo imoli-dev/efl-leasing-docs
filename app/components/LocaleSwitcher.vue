@@ -1,5 +1,9 @@
 <script setup lang="ts">
-import { locales } from '~/config/docs-sources'
+import { locales, type Locale } from '~/config/docs-sources'
+
+withDefaults(defineProps<{ mode?: 'dropdown' | 'inline' }>(), {
+  mode: 'dropdown'
+})
 
 const { locale: currentLocale } = useCurrentLocale()
 const { switchLocale } = useLocaleSwitch()
@@ -9,21 +13,42 @@ const localeLabels: Record<string, string> = {
   pl: 'Polski'
 }
 
+function selectLocale(locale: Locale) {
+  if (currentLocale.value !== locale) {
+    switchLocale(locale)
+  }
+}
+
 const dropdownItems = computed(() =>
   locales.map(locale => ({
     label: localeLabels[locale] ?? locale.toUpperCase(),
     color: (currentLocale.value === locale ? 'primary' : undefined) as 'primary' | undefined,
-    onSelect: () => {
-      if (currentLocale.value !== locale) {
-        switchLocale(locale)
-      }
-    }
+    onSelect: () => selectLocale(locale)
   }))
 )
 </script>
 
 <template>
+  <div
+    v-if="mode === 'inline'"
+    class="grid grid-cols-2 gap-1"
+  >
+    <UButton
+      v-for="locale in locales"
+      :key="locale"
+      :label="localeLabels[locale] ?? locale.toUpperCase()"
+      :variant="currentLocale === locale ? 'soft' : 'ghost'"
+      :color="currentLocale === locale ? 'primary' : 'neutral'"
+      :icon="currentLocale === locale ? 'i-lucide-check' : undefined"
+      size="sm"
+      block
+      class="justify-center"
+      @click="selectLocale(locale)"
+    />
+  </div>
+
   <UDropdownMenu
+    v-else
     v-slot="{ open }"
     :modal="false"
     :items="dropdownItems"

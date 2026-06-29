@@ -66,7 +66,9 @@ const headerHome = computed(() => {
         class="lg:hidden"
       />
 
-      <LocaleSwitcher />
+      <div class="hidden lg:block">
+        <LocaleSwitcher />
+      </div>
 
       <UColorModeButton v-if="header?.colorMode" />
 
@@ -80,10 +82,21 @@ const headerHome = computed(() => {
     </template>
 
     <template #body>
-      <UContentNavigation
-        highlight
-        :navigation="navigation"
-      />
+      <div class="flex flex-col gap-4">
+        <div class="space-y-1.5 lg:hidden">
+          <p class="px-1 text-xs font-semibold text-muted">
+            Język / Language
+          </p>
+          <LocaleSwitcher mode="inline" />
+        </div>
+
+        <USeparator class="lg:hidden" />
+
+        <UContentNavigation
+          highlight
+          :navigation="navigation"
+        />
+      </div>
     </template>
   </UHeader>
 </template>
