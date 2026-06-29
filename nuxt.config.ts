@@ -24,6 +24,12 @@ export default defineNuxtConfig({
   css: ['~/assets/css/main.css'],
 
   content: {
+    // Use Node's built-in SQLite connector (node:sqlite, Node >= 22.5.0).
+    // The default `better-sqlite3` native binding fails to load in the
+    // serverless runtime ("Module did not self-register"), see nuxt/content#3689.
+    experimental: {
+      sqliteConnector: 'native'
+    },
     build: {
       markdown: {
         toc: {
@@ -53,7 +59,13 @@ export default defineNuxtConfig({
       routes: [
         '/',
         '/en',
-        '/pl'
+        '/pl',
+        '/en/docs',
+        '/pl/docs',
+        '/en/sdk',
+        '/pl/sdk',
+        '/en/wordpress-plugin',
+        '/pl/wordpress-plugin'
       ],
       crawlLinks: true,
       autoSubfolderIndex: false,
