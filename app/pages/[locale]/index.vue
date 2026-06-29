@@ -20,7 +20,7 @@ const collection = getLandingCollection(locale)
 
 const { data: page } = await useAsyncData(
   `landing-${locale}`,
-  () => queryCollection(collection).path('/').first()
+  () => queryCollection(collection).path(`/${locale}`).first()
 )
 
 if (!page.value) {

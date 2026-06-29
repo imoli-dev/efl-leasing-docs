@@ -90,11 +90,11 @@ export async function resolveLocaleSwitchWithChecker(
     return buildLocaleSwitchResult(targetLocale, logicalPath, {
       sourceExistsInTarget,
       sourceIndexExists,
-      landingExists: await pageExists(getLandingCollection(targetLocale), '/')
+      landingExists: await pageExists(getLandingCollection(targetLocale), withLocalePath(targetLocale, '/'))
     })
   }
 
-  const landingExists = await pageExists(getLandingCollection(targetLocale), '/')
+  const landingExists = await pageExists(getLandingCollection(targetLocale), withLocalePath(targetLocale, '/'))
 
   return buildLocaleSwitchResult(targetLocale, logicalPath, {
     sourceExistsInTarget: false,
