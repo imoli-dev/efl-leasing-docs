@@ -1,5 +1,5 @@
 /** Names of the page-type content collections defined in content.config.ts. */
-export type DocCollection = 'docs_en' | 'docs_pl' | 'sdk_docs' | 'wordpress_docs'
+export type DocCollection = 'docs_en' | 'docs_pl' | 'sdk_docs_en' | 'sdk_docs_pl' | 'wordpress_docs'
 
 export type Locale = 'en' | 'pl'
 
@@ -36,8 +36,8 @@ export const docSources: DocSource[] = [
     label: 'PHP SDK',
     prefix: '/sdk',
     collections: {
-      en: 'sdk_docs',
-      pl: 'sdk_docs'
+      en: 'sdk_docs_en',
+      pl: 'sdk_docs_pl'
     },
     icon: 'i-lucide-package',
     editBaseUrl: {

@@ -42,11 +42,7 @@ export default defineContentConfig({
       }
     }),
 
-    // External repositories currently ship docs in a single language only (no
-    // en/pl subfolders), so each source maps to one shared collection that is
-    // served under both locales. When real translations land in the repo, split
-    // these into per-locale collections via include/exclude on the subfolders.
-    sdk_docs: defineCollection({
+    sdk_docs_en: defineCollection({
       type: 'page',
       source: {
         repository: {
@@ -54,12 +50,28 @@ export default defineContentConfig({
           branch: 'master',
           auth: githubAuth
         },
-        include: 'docs/**',
+        include: 'docs/en/**',
         prefix: '/sdk'
       },
       schema: sdkLinksSchema
     }),
 
+    sdk_docs_pl: defineCollection({
+      type: 'page',
+      source: {
+        repository: {
+          url: 'https://github.com/imoli-dev/efl-leasing-sdk',
+          branch: 'master',
+          auth: githubAuth
+        },
+        include: 'docs/pl/**',
+        prefix: '/sdk'
+      },
+      schema: sdkLinksSchema
+    }),
+
+    // The WordPress repository still ships docs in a single language only, so it
+    // remains shared under both locales until translated folders are added there.
     wordpress_docs: defineCollection({
       type: 'page',
       source: {
