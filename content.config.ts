@@ -70,6 +70,34 @@ export default defineContentConfig({
       schema: sdkLinksSchema
     }),
 
+    // PrestaShop repositories ship docs in a single language only, so each
+    // collection is shared under both locales until translated folders are added.
+    prestashop_docs: defineCollection({
+      type: 'page',
+      source: {
+        repository: {
+          url: 'https://github.com/imoli-dev/efl-leasing-prestashop-module',
+          branch: 'master',
+          auth: githubAuth
+        },
+        include: 'docs/**',
+        prefix: '/prestashop-module'
+      }
+    }),
+
+    prestashop17_docs: defineCollection({
+      type: 'page',
+      source: {
+        repository: {
+          url: 'https://github.com/imoli-dev/efl-leasing-prestashop17-module',
+          branch: 'master',
+          auth: githubAuth
+        },
+        include: 'docs/**',
+        prefix: '/prestashop17-module'
+      }
+    }),
+
     // The WordPress repository still ships docs in a single language only, so it
     // remains shared under both locales until translated folders are added there.
     wordpress_docs: defineCollection({

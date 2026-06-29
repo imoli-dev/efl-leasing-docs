@@ -20,7 +20,10 @@ export function useLocaleSwitch() {
     if (result.fallback) {
       return navigateTo({
         path: result.to,
-        query: { lang_fallback: '1' }
+        query: {
+          lang_fallback: '1',
+          lang_fallback_reason: result.reason ?? 'missing_translation'
+        }
       })
     }
 

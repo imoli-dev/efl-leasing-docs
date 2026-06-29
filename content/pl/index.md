@@ -130,10 +130,22 @@ Możesz zacząć od gotowej integracji ecommerce lub zbudować własny przepływ
   to: /pl/prestashop-module
   ---
   #title
-  Moduł PrestaShop
+  Moduł PrestaShop 8+
 
   #description
-  Natywny moduł PrestaShop dodający EFL Leasing jako metodę płatności w koszyku i na stronach produktów. Konfiguruj limity, warunki i ustawienia wyświetlania bezpośrednio z panelu administracyjnego.
+  Natywny moduł PrestaShop 8+ dodający EFL Leasing jako metodę płatności w koszyku i na stronach produktów. Konfiguruj limity, warunki i ustawienia wyświetlania bezpośrednio z panelu administracyjnego.
+  :::
+
+  :::u-page-feature
+  ---
+  icon: i-simple-icons-prestashop
+  to: /pl/prestashop17-module
+  ---
+  #title
+  Moduł PrestaShop 1.7
+
+  #description
+  Dedykowany moduł PrestaShop 1.7 dla sklepów, które jeszcze nie migrowały. Dodaje EFL Leasing do koszyka i stron produktów z tym samym przepływem leasingowym.
   :::
 
   :::u-page-feature

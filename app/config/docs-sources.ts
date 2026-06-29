@@ -1,5 +1,5 @@
 /** Names of the page-type content collections defined in content.config.ts. */
-export type DocCollection = 'docs_en' | 'docs_pl' | 'sdk_docs_en' | 'sdk_docs_pl' | 'wordpress_docs'
+export type DocCollection = 'docs_en' | 'docs_pl' | 'sdk_docs_en' | 'sdk_docs_pl' | 'prestashop_docs' | 'prestashop17_docs' | 'wordpress_docs'
 
 export type Locale = 'en' | 'pl'
 
@@ -18,6 +18,11 @@ export interface DocSource {
   contentPathPrefix?: string
   /** Logical index path without locale */
   indexPath?: string
+  /**
+   * Language of the markdown when `collections.en` and `collections.pl` point to
+   * the same remote collection. The UI locale can differ from the content locale.
+   */
+  contentLocale?: Locale
 }
 
 export const docSources: DocSource[] = [
@@ -54,6 +59,44 @@ export const docSources: DocSource[] = [
     indexPath: '/sdk'
   },
   {
+    id: 'prestashop-module',
+    labels: {
+      en: 'PrestaShop 8+ Module',
+      pl: 'Moduł PrestaShop 8+'
+    },
+    prefix: '/prestashop-module',
+    collections: {
+      en: 'prestashop_docs',
+      pl: 'prestashop_docs'
+    },
+    icon: 'i-simple-icons-prestashop',
+    contentLocale: 'pl',
+    editBaseUrl: {
+      en: 'https://github.com/imoli-dev/efl-leasing-prestashop-module/edit/master/docs',
+      pl: 'https://github.com/imoli-dev/efl-leasing-prestashop-module/edit/master/docs'
+    },
+    indexPath: '/prestashop-module'
+  },
+  {
+    id: 'prestashop17-module',
+    labels: {
+      en: 'PrestaShop 1.7 Module',
+      pl: 'Moduł PrestaShop 1.7'
+    },
+    prefix: '/prestashop17-module',
+    collections: {
+      en: 'prestashop17_docs',
+      pl: 'prestashop17_docs'
+    },
+    icon: 'i-simple-icons-prestashop',
+    contentLocale: 'pl',
+    editBaseUrl: {
+      en: 'https://github.com/imoli-dev/efl-leasing-prestashop17-module/edit/master/docs',
+      pl: 'https://github.com/imoli-dev/efl-leasing-prestashop17-module/edit/master/docs'
+    },
+    indexPath: '/prestashop17-module'
+  },
+  {
     id: 'wordpress-plugin',
     labels: {
       en: 'WordPress / WooCommerce Plugin',
@@ -65,9 +108,10 @@ export const docSources: DocSource[] = [
       pl: 'wordpress_docs'
     },
     icon: 'i-simple-icons-wordpress',
+    contentLocale: 'pl',
     editBaseUrl: {
-      en: 'https://github.com/imoli-dev/efl-leasing-wp-plugin/edit/master/docs/en',
-      pl: 'https://github.com/imoli-dev/efl-leasing-wp-plugin/edit/master/docs/pl'
+      en: 'https://github.com/imoli-dev/efl-leasing-wp-plugin/edit/master/docs',
+      pl: 'https://github.com/imoli-dev/efl-leasing-wp-plugin/edit/master/docs'
     },
     indexPath: '/wordpress-plugin'
   }

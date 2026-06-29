@@ -81,6 +81,7 @@ const frontmatterLinks = computed(() => (page as { links?: Array<Record<string, 
     </UPageHeader>
 
     <UPageBody>
+      <DocContentLocaleBanner :source="source" />
       <ContentRenderer :value="page" />
       <USeparator v-if="surround?.length" />
       <UContentSurround :surround="surround" />

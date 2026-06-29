@@ -71,6 +71,10 @@ export default defineNuxtConfig({
         '/pl/docs',
         '/en/sdk',
         '/pl/sdk',
+        '/en/prestashop-module',
+        '/pl/prestashop-module',
+        '/en/prestashop17-module',
+        '/pl/prestashop17-module',
         '/en/wordpress-plugin',
         '/pl/wordpress-plugin'
       ],
@@ -140,6 +144,20 @@ export default defineNuxtConfig({
         contentCollection: 'sdk_docs_en',
         contentFilters: [
           { field: 'path', operator: 'LIKE', value: '/sdk/guides%' }
+        ]
+      },
+      {
+        title: 'PrestaShop 8+ Module',
+        contentCollection: 'prestashop_docs',
+        contentFilters: [
+          { field: 'path', operator: 'LIKE', value: '/prestashop-module%' }
+        ]
+      },
+      {
+        title: 'PrestaShop 1.7 Module',
+        contentCollection: 'prestashop17_docs',
+        contentFilters: [
+          { field: 'path', operator: 'LIKE', value: '/prestashop17-module%' }
         ]
       },
       {

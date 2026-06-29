@@ -13,7 +13,7 @@ import {
   type Locale
 } from '~/config/docs-sources'
 import { mapNavigationPaths } from '~/utils/doc-navigation'
-import { getDocFallbackPath, getSourceIndexFallbackPath } from '~/utils/locale-switch'
+import { getDocFallbackPath, getSourceIndexFallbackPath, type LocaleSwitchReason } from '~/utils/locale-switch'
 
 async function queryDocPage(collection: DocCollection, contentPath: string) {
   return queryCollection(collection as keyof Collections).path(contentPath).first()
@@ -26,7 +26,7 @@ type DocPageItem = NonNullable<Awaited<ReturnType<typeof queryDocPage>>>
  * URL, which would otherwise cause an infinite refresh loop. If the only candidate
  * is the current page, we throw a 404 instead of redirecting.
  */
-async function redirectToFallback(targetPath: string): Promise<never> {
+async function redirectToFallback(targetPath: string, reason: LocaleSwitchReason = 'missing_translation'): Promise<never> {
   const route = useRoute()
   const currentPath = route.path
   let destination = targetPath
@@ -42,7 +42,10 @@ async function redirectToFallback(targetPath: string): Promise<never> {
 
   await navigateTo({
     path: destination,
-    query: { lang_fallback: '1' }
+    query: {
+      lang_fallback: '1',
+      lang_fallback_reason: reason
+    }
   })
 
   throw createError({ statusCode: 404, statusMessage: 'Page not found', fatal: true })
@@ -97,7 +100,7 @@ export async function loadDocPage(
   const page = await queryDocPage(collection, contentPath)
 
   if (!page) {
-    return redirectToFallback(getDocFallbackPath(locale, contentPath))
+    return redirectToFallback(getDocFallbackPath(locale, contentPath), 'missing_translation')
   }
 
   return page
@@ -125,7 +128,7 @@ export async function loadDocIndexPage(
   }
 
   if (!page) {
-    return redirectToFallback(getSourceIndexFallbackPath(locale, source))
+    return redirectToFallback(getSourceIndexFallbackPath(locale, source), 'no_source_index')
   }
 
   return page
