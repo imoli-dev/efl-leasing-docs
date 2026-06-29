@@ -6,6 +6,13 @@ const navigation = inject<Ref<ContentNavigationItem[]>>('navigation')
 const { header } = useAppConfig()
 const { locale } = useCurrentLocale()
 
+const docsSectionLabels: Record<string, string> = {
+  en: 'Documentation',
+  pl: 'Dokumentacja'
+}
+
+const docsSectionLabel = computed(() => docsSectionLabels[locale.value] ?? docsSectionLabels.en)
+
 const headerHome = computed(() => {
   const to = header?.to || '/'
   if (to === '/') {
@@ -85,7 +92,7 @@ const headerHome = computed(() => {
       <div class="flex flex-col gap-4">
         <div class="space-y-1.5 lg:hidden">
           <p class="px-1 text-xs font-semibold text-muted">
-            Dokumentacja / Documentation
+            {{ docsSectionLabel }}
           </p>
           <DocsSwitcher mode="inline" />
         </div>
