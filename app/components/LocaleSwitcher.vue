@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { locales, type Locale } from '~/config/docs-sources'
 
-withDefaults(defineProps<{ mode?: 'dropdown' | 'inline' }>(), {
-  mode: 'dropdown'
+withDefaults(defineProps<{ block?: boolean }>(), {
+  block: false
 })
 
 const { locale: currentLocale } = useCurrentLocale()
@@ -29,40 +29,23 @@ const dropdownItems = computed(() =>
 </script>
 
 <template>
-  <div
-    v-if="mode === 'inline'"
-    class="grid grid-cols-2 gap-1"
-  >
-    <UButton
-      v-for="locale in locales"
-      :key="locale"
-      :label="localeLabels[locale] ?? locale.toUpperCase()"
-      :variant="currentLocale === locale ? 'soft' : 'ghost'"
-      :color="currentLocale === locale ? 'primary' : 'neutral'"
-      :icon="currentLocale === locale ? 'i-lucide-check' : undefined"
-      size="sm"
-      block
-      class="justify-center"
-      @click="selectLocale(locale)"
-    />
-  </div>
-
   <UDropdownMenu
-    v-else
     v-slot="{ open }"
     :modal="false"
     :items="dropdownItems"
-    :content="{ align: 'end' }"
+    :content="{ align: block ? 'start' : 'end' }"
     :ui="{ content: 'min-w-36' }"
     size="xs"
   >
     <UButton
       :label="localeLabels[currentLocale] ?? currentLocale.toUpperCase()"
+      icon="i-lucide-languages"
       variant="subtle"
       trailing-icon="i-lucide-chevron-down"
       size="xs"
+      :block="block"
       class="rounded-full"
-      :class="[open && 'bg-primary/15']"
+      :class="[open && 'bg-primary/15', block && 'justify-between']"
       :ui="{
         trailingIcon: ['transition-transform duration-200', open ? 'rotate-180' : undefined].filter(Boolean).join(' ')
       }"

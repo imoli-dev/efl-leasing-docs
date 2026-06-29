@@ -90,11 +90,8 @@ const headerHome = computed(() => {
           <DocsSwitcher mode="inline" />
         </div>
 
-        <div class="space-y-1.5 lg:hidden">
-          <p class="px-1 text-xs font-semibold text-muted">
-            Język / Language
-          </p>
-          <LocaleSwitcher mode="inline" />
+        <div class="lg:hidden">
+          <LocaleSwitcher block />
         </div>
 
         <USeparator class="lg:hidden" />
