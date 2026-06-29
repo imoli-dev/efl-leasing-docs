@@ -56,7 +56,7 @@ const headerHome = computed(() => {
         <NuxtLink :to="headerHome">
           <AppLogo class="w-auto h-6 shrink-0" />
         </NuxtLink>
-        <DocsSwitcher />
+        <DocsSwitcher class="hidden lg:flex" />
       </div>
     </template>
 
@@ -83,6 +83,13 @@ const headerHome = computed(() => {
 
     <template #body>
       <div class="flex flex-col gap-4">
+        <div class="space-y-1.5 lg:hidden">
+          <p class="px-1 text-xs font-semibold text-muted">
+            Dokumentacja / Documentation
+          </p>
+          <DocsSwitcher mode="inline" />
+        </div>
+
         <div class="space-y-1.5 lg:hidden">
           <p class="px-1 text-xs font-semibold text-muted">
             Język / Language

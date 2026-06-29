@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import { getLocalizedSourceTo } from '~/config/docs-sources'
 
+withDefaults(defineProps<{ mode?: 'dropdown' | 'inline' }>(), {
+  mode: 'dropdown'
+})
+
 const route = useRoute()
 const { sources, getByPath } = useDocsSources()
 const { locale } = useCurrentLocale()
@@ -19,7 +23,28 @@ const dropdownItems = computed(() =>
 </script>
 
 <template>
-  <div class="flex items-center gap-2">
+  <div
+    v-if="mode === 'inline'"
+    class="flex flex-col gap-1"
+  >
+    <UButton
+      v-for="source in sources"
+      :key="source.id"
+      :label="source.label"
+      :to="getLocalizedSourceTo(source, locale)"
+      :icon="source.icon"
+      :variant="currentSource?.id === source.id ? 'soft' : 'ghost'"
+      :color="currentSource?.id === source.id ? 'primary' : 'neutral'"
+      size="sm"
+      block
+      class="justify-start"
+    />
+  </div>
+
+  <div
+    v-else
+    class="flex items-center gap-2"
+  >
     <UDropdownMenu
       v-slot="{ open }"
       :modal="false"
