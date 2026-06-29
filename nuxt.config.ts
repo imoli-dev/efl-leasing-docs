@@ -23,6 +23,13 @@ export default defineNuxtConfig({
 
   css: ['~/assets/css/main.css'],
 
+  // Pin the canonical site URL so generated links (LLM actions, OG images, etc.)
+  // never leak the per-deployment Vercel URL that nuxt-site-config auto-detects.
+  site: {
+    url: siteUrl,
+    name: 'EFL Leasing Docs'
+  },
+
   content: {
     // Use Node's built-in SQLite connector (node:sqlite, Node >= 22.5.0).
     // The default `better-sqlite3` native binding fails to load in the
@@ -88,6 +95,11 @@ export default defineNuxtConfig({
 
   llms: {
     domain: siteUrl,
+    // Disable @nuxt/content's built-in /raw/**.md route. It queries the URL path
+    // verbatim (e.g. /en/sdk), but our content is stored under locale-stripped
+    // logical paths (e.g. /sdk), so it 404s. Our own locale-aware handler in
+    // server/routes/raw/[...slug].md.get.ts handles these requests instead.
+    contentRawMarkdown: false,
     title: 'EFL Leasing Docs',
     description: 'Documentation for EFL Leasing integrations, including the PHP SDK.',
     full: {

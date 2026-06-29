@@ -1,6 +1,6 @@
 import { withLeadingSlash } from 'ufo'
 import { stringify } from 'minimark/stringify'
-import { queryCollection } from '@nuxt/content/server'
+import { queryCollection, queryCollectionNavigation } from '@nuxt/content/server'
 import type { Collections } from '@nuxt/content'
 import {
   defaultLocale,
@@ -23,7 +23,25 @@ export default eventHandler(async (event) => {
     ? getDocSourceCollection(source, resolvedLocale)
     : `docs_${resolvedLocale}`) as keyof Collections
 
-  const page = await queryCollection(event, collection).path(logicalPath).first()
+  let page = await queryCollection(event, collection).path(logicalPath).first()
+
+  // Some sources have no dedicated index document for their root (e.g. /docs or
+  // /wordpress-plugin only expose child pages). The rendered page falls back to
+  // the first navigation/collection item in loadDocIndexPage, so mirror that here
+  // to keep the raw markdown endpoint in sync with what the user actually sees.
+  if (!page && source && logicalPath === source.prefix) {
+    const navigation = await queryCollectionNavigation(event, collection)
+    const firstPath = (navigation?.[0] as { path?: string } | undefined)?.path
+    if (firstPath) {
+      page = await queryCollection(event, collection).path(firstPath).first()
+    }
+
+    if (!page) {
+      const items = await queryCollection(event, collection).all()
+      page = items[0] ?? null
+    }
+  }
+
   if (!page) {
     throw createError({ statusCode: 404, statusMessage: 'Page not found', fatal: true })
   }
