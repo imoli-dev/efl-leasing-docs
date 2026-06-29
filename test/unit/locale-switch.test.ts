@@ -6,7 +6,7 @@ import {
   stripLocaleFromPath,
   withLocalePath
 } from '../../app/config/docs-sources'
-import { buildLocaleSwitchResult } from '../../app/utils/locale-switch'
+import { buildLocaleSwitchResult, resolveLocaleSwitchWithChecker } from '../../app/utils/locale-switch'
 
 describe('docs-sources path helpers', () => {
   it('extracts locale from localized paths', () => {
@@ -72,6 +72,20 @@ describe('locale switch resolver', () => {
       to: '/pl/docs',
       fallback: true,
       reason: 'no_source_index'
+    })
+  })
+
+  it('switches the docs index without fallback when only the index page exists', async () => {
+    // The docs source renders its index from /docs/about, so there is no literal
+    // page at /docs. Switching from /pl/docs should be a clean switch.
+    const pageExists = async (_collection: string, logicalPath: string) =>
+      logicalPath === '/docs/about' || logicalPath === '/en'
+
+    const result = await resolveLocaleSwitchWithChecker('en', '/pl/docs', pageExists)
+
+    expect(result).toEqual({
+      to: '/en/docs',
+      fallback: false
     })
   })
 })

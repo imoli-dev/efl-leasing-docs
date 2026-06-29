@@ -81,8 +81,14 @@ export async function resolveLocaleSwitchWithChecker(
 
   if (source) {
     const collection = getDocSourceCollection(source, targetLocale)
-    const sourceExistsInTarget = await pageExists(collection, logicalPath)
     const sourceIndexLogical = source.indexPath ?? source.prefix
+    // On a source index URL (e.g. /docs) the rendered content lives at the
+    // source `indexPath` (e.g. /docs/about), so there is no literal page at the
+    // prefix. Treat the index as a direct match to avoid a false "missing
+    // translation" fallback when switching languages.
+    const isAtSourceIndex = logicalPath === source.prefix || logicalPath === sourceIndexLogical
+    const sourceExistsInTarget = await pageExists(collection, logicalPath)
+      || (isAtSourceIndex && await pageExists(collection, sourceIndexLogical))
     const sourceIndexExists = sourceExistsInTarget
       ? true
       : await pageExists(collection, sourceIndexLogical)
