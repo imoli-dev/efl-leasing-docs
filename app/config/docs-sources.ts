@@ -160,19 +160,32 @@ export function getCollectionsForLocale(locale: Locale): DocCollection[] {
   return docSources.map(source => source.collections[locale])
 }
 
-/** Unwraps root nav item when it matches the prefix (e.g. "Sdk" wrapping all sections). Nuxt Content uses `path`, not `_path`. */
+/** Unwraps root nav item when it matches the source prefix (e.g. "Overview" at /sdk). */
 export function unwrapRootNavigation<T extends { _path?: string, path?: string, children?: unknown[] }>(
   items: T[] | undefined,
-  urlPrefix: string
+  localizedPrefix: string,
+  logicalPrefix?: string
 ): T[] | undefined {
-  if (!items || items.length !== 1) return items
+  if (!items || items.length !== 1) {
+    return items
+  }
+
   const first = items[0]
-  if (!first) return items
+  if (!first) {
+    return items
+  }
+
   const path = (first._path ?? first.path ?? '').replace(/\/$/, '')
-  const prefixNorm = urlPrefix.replace(/\/$/, '')
-  const matchesPrefix = path === prefixNorm || path === `${prefixNorm}/`
+  const localizedNorm = localizedPrefix.replace(/\/$/, '')
+  const logicalNorm = (logicalPrefix ?? localizedPrefix).replace(/\/$/, '')
+  const matchesPrefix = path === localizedNorm
+    || path === `${localizedNorm}/`
+    || path === logicalNorm
+    || path === `${logicalNorm}/`
+
   if (matchesPrefix && first.children?.length) {
     return first.children as T[]
   }
+
   return items
 }

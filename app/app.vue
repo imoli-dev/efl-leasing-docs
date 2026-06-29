@@ -33,8 +33,8 @@ const navigation = computed<ContentNavigationItem[] | undefined>(() => {
     const raw = navByCollection.value?.[collection]
     if (raw) {
       const localizedPrefix = getLocalizedSourceTo(source, locale.value)
-      const mapped = mapNavigationPaths(raw, localizedPrefix, source.contentPathPrefix)
-      return unwrapRootNavigation(mapped, localizedPrefix)
+      const mapped = mapNavigationPaths(raw, localizedPrefix, source.prefix)
+      return unwrapRootNavigation(mapped, localizedPrefix, source.prefix)
     }
     return raw
   }
@@ -50,8 +50,8 @@ const navigation = computed<ContentNavigationItem[] | undefined>(() => {
   }
 
   const localizedPrefix = getLocalizedSourceTo(docsSource, locale.value)
-  const mapped = mapNavigationPaths(raw, localizedPrefix, docsSource.contentPathPrefix)
-  return unwrapRootNavigation(mapped, localizedPrefix)
+  const mapped = mapNavigationPaths(raw, localizedPrefix, docsSource.prefix)
+  return unwrapRootNavigation(mapped, localizedPrefix, docsSource.prefix)
 })
 
 const searchNavigation = computed<ContentNavigationItem[]>(() => {
@@ -63,8 +63,8 @@ const searchNavigation = computed<ContentNavigationItem[]>(() => {
     if (!raw) continue
 
     const localizedPrefix = getLocalizedSourceTo(source, locale.value)
-    const mapped = mapNavigationPaths(raw, localizedPrefix, source.contentPathPrefix)
-    const unwrapped = unwrapRootNavigation(mapped, localizedPrefix)
+    const mapped = mapNavigationPaths(raw, localizedPrefix, source.prefix)
+    const unwrapped = unwrapRootNavigation(mapped, localizedPrefix, source.prefix)
 
     if (unwrapped?.length) {
       groups.push({

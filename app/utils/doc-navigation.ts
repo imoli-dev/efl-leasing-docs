@@ -1,25 +1,39 @@
 import type { ContentNavigationItem } from '@nuxt/content'
 
+function getItemPath(item: ContentNavigationItem): string {
+  return (item as { path?: string }).path ?? (item as { _path?: string })._path ?? ''
+}
+
+/**
+ * Maps logical content paths (e.g. /sdk/getting-started) to localized URL paths
+ * (e.g. /en/sdk/getting-started). Pass the source's logical prefix as
+ * `logicalPrefix` so the root index can be unwrapped from the sidebar.
+ */
 export function mapNavigationPaths(
   items: ContentNavigationItem[] | undefined,
-  urlPrefix: string,
-  contentPathPrefix?: string
+  localizedPrefix: string,
+  logicalPrefix?: string
 ): ContentNavigationItem[] | undefined {
-  if (!items) return items
+  if (!items) {
+    return items
+  }
+
+  const prefix = logicalPrefix ?? localizedPrefix
 
   return items.map((item) => {
-    const itemPath = (item as { _path?: string })._path
-    const mappedPath = itemPath
-      ? (contentPathPrefix
-          ? itemPath.replace(contentPathPrefix, urlPrefix)
-          : (itemPath === '/' ? urlPrefix : urlPrefix + itemPath))
-      : ((item as { path?: string }).path ?? '')
+    const rawPath = getItemPath(item)
+    const mappedPath = !rawPath || rawPath === '/'
+      ? localizedPrefix
+      : rawPath.startsWith(prefix)
+        ? `${localizedPrefix}${rawPath.slice(prefix.length)}` || localizedPrefix
+        : `${localizedPrefix}${rawPath.startsWith('/') ? rawPath : `/${rawPath}`}`
+
     return {
       ...item,
       _path: mappedPath,
       path: mappedPath,
       children: item.children
-        ? mapNavigationPaths(item.children as ContentNavigationItem[], urlPrefix, contentPathPrefix)
+        ? mapNavigationPaths(item.children as ContentNavigationItem[], localizedPrefix, prefix)
         : item.children
     }
   })
@@ -28,7 +42,7 @@ export function mapNavigationPaths(
 export function ensurePathOnNavItems(items: ContentNavigationItem[]): ContentNavigationItem[] {
   return items.map(item => ({
     ...item,
-    path: (item as { path?: string }).path ?? (item as { _path?: string })._path ?? '',
+    path: getItemPath(item),
     children: item.children
       ? ensurePathOnNavItems(item.children as ContentNavigationItem[])
       : item.children

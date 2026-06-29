@@ -68,8 +68,8 @@ const { data: navigation } = await useAsyncData(
     const collection = getDocSourceCollection(source, locale.value)
     const raw = await queryCollectionNavigation(collection)
     const localizedPrefix = getLocalizedSourceTo(source, locale.value)
-    const mapped = mapNavigationPaths(raw, localizedPrefix, source.contentPathPrefix)
-    return unwrapRootNavigation(mapped, localizedPrefix)
+    const mapped = mapNavigationPaths(raw, localizedPrefix, source.prefix)
+    return unwrapRootNavigation(mapped, localizedPrefix, source.prefix)
   },
   { watch: [locale, () => route.path] }
 )

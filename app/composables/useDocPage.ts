@@ -69,8 +69,8 @@ export function useDocPageContext(sourceId: string, locale: Locale) {
   )
 
   const navigation = computed(() => {
-    const mapped = mapNavigationPaths(rawNavigation.value, localizedPrefix, source.contentPathPrefix)
-    return unwrapRootNavigation(mapped, localizedPrefix)
+    const mapped = mapNavigationPaths(rawNavigation.value, localizedPrefix, source.prefix)
+    return unwrapRootNavigation(mapped, localizedPrefix, source.prefix)
   })
 
   provide('navigation', navigation)
