@@ -9,16 +9,16 @@ EFL Leasing helps you add leasing and financing as a payment method to your ecom
 This documentation is organised around two main building blocks:
 
 - **PHP SDK** – a PHP SDK for custom integrations and backend services
-- **Ecommerce integrations** – ready‑made modules for popular shop platforms
+- **Ecommerce integrations** – ready‑made integrations for popular shop platforms
 
-Use the PHP SDK when you build your own integration or connect multiple sales channels. Use the ecommerce plugins when you just want to enable EFL Leasing quickly in a specific platform without touching the code.
+Use the PHP SDK when you build your own integration or connect multiple sales channels. Use the ecommerce integrations when you just want to enable EFL Leasing quickly on a specific platform without touching the code.
 
 ## Where to start
 
 If this is your first time with EFL Leasing, start by deciding how you want to integrate:
 
 - **Use the PHP SDK** when you build your own backend integration or connect multiple sales channels.
-- **Use an ecommerce integration** when you want a ready‑made plugin for PrestaShop, WooCommerce or Shoper.
+- **Use an ecommerce integration** when you want a ready‑made integration for PrestaShop, WooCommerce or Shoper.
 
 In both cases you can configure test credentials, verify the flow in a sandbox environment and then go live with production credentials.
 
@@ -64,7 +64,7 @@ In both cases you can configure test credentials, verify the flow in a sandbox e
 
 ## Ecommerce integrations
 
-You can integrate EFL Leasing with your store using one of the official plugins:
+You can integrate EFL Leasing with your store using one of the official integrations:
 
 - **PrestaShop module** – installable from your PrestaShop back office, adds EFL Leasing as a payment option and on product pages.
 - **WordPress / WooCommerce plugin** – ready‑to‑use plugin for WooCommerce‑based shops.
@@ -73,5 +73,5 @@ You can integrate EFL Leasing with your store using one of the official plugins:
 All ecommerce integrations are built on top of the same **EFL Leasing PHP SDK**. This means:
 
 - the leasing decision and application flow is consistent across platforms
-- you can mix plugins with custom SDK integrations in other channels
+- you can combine ecommerce integrations with custom SDK integrations in other channels
 - monitoring and logging follow the same patterns in your backend systems

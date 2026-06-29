@@ -9,16 +9,16 @@ EFL Leasing pomaga dodać leasing i finansowanie jako metodę płatności w skle
 Ta dokumentacja jest zorganizowana wokół dwóch głównych elementów:
 
 - **PHP SDK** – biblioteka PHP do własnych integracji i usług backendowych
-- **Integracje ecommerce** – gotowe moduły dla popularnych platform sklepowych
+- **Integracje ecommerce** – gotowe integracje dla popularnych platform sklepowych
 
-Używaj PHP SDK, gdy budujesz własną integrację lub łączysz wiele kanałów sprzedaży. Wybierz wtyczki ecommerce, gdy chcesz szybko włączyć EFL Leasing na konkretnej platformie bez pisania kodu.
+Używaj PHP SDK, gdy budujesz własną integrację lub łączysz wiele kanałów sprzedaży. Wybierz integracje ecommerce, gdy chcesz szybko włączyć EFL Leasing na konkretnej platformie bez pisania kodu.
 
 ## Od czego zacząć
 
 Jeśli dopiero zaczynasz z EFL Leasing, najpierw zdecyduj, jak chcesz integrować:
 
 - **Użyj PHP SDK**, gdy budujesz własną integrację backendową lub łączysz wiele kanałów sprzedaży.
-- **Użyj integracji ecommerce**, gdy potrzebujesz gotowej wtyczki dla PrestaShop, WooCommerce lub Shoper.
+- **Użyj integracji ecommerce**, gdy potrzebujesz gotowej integracji dla PrestaShop, WooCommerce lub Shoper.
 
 W obu przypadkach możesz skonfigurować dane testowe, zweryfikować przepływ w środowisku sandbox, a następnie przejść na produkcję.
 
@@ -64,7 +64,7 @@ W obu przypadkach możesz skonfigurować dane testowe, zweryfikować przepływ w
 
 ## Integracje ecommerce
 
-EFL Leasing możesz zintegrować ze sklepem za pomocą jednej z oficjalnych wtyczek:
+EFL Leasing możesz zintegrować ze sklepem za pomocą jednej z oficjalnych integracji:
 
 - **Moduł PrestaShop** – instalowany z panelu PrestaShop, dodaje EFL Leasing jako metodę płatności i na stronach produktów.
 - **Wtyczka WordPress / WooCommerce** – gotowe rozwiązanie dla sklepów opartych o WooCommerce.
@@ -73,5 +73,5 @@ EFL Leasing możesz zintegrować ze sklepem za pomocą jednej z oficjalnych wtyc
 Wszystkie integracje ecommerce opierają się na tym samym **PHP SDK EFL Leasing**. Oznacza to, że:
 
 - przepływ decyzji i wniosku leasingowego jest spójny między platformami
-- możesz łączyć wtyczki z własnymi integracjami SDK w innych kanałach
+- możesz łączyć integracje ecommerce z własnymi integracjami SDK w innych kanałach
 - monitorowanie i logowanie działają według tych samych wzorców w systemach backendowych

@@ -1,7 +1,7 @@
 ---
 seo:
   title: EFL Leasing – PHP SDK & Ecommerce Integrations
-  description: Integrate leasing and financing into your ecommerce store with EFL Leasing PHP SDK and plugins for PrestaShop, WordPress, and more.
+  description: Integrate leasing and financing into your ecommerce store with EFL Leasing PHP SDK and integrations for PrestaShop, WordPress, Shoper and more.
 ---
 
 ::u-page-hero{class="dark:bg-gradient-to-b from-neutral-900 to-neutral-950"}
@@ -13,10 +13,10 @@ reverse: false
 :hero-background
 
 #title
-[EFL Leasing]{.text-primary} – PHP SDK & Ecommerce Plugins
+[EFL Leasing]{.text-primary} – PHP SDK & Ecommerce Integrations
 
 #description
-Integrate leasing and financing into your online store. Use our PHP SDK for custom integrations or choose a ready-made plugin for your ecommerce platform.
+Integrate leasing and financing into your online store. Use our PHP SDK for custom integrations or choose a ready-made integration for your ecommerce platform.
 
 #links
   :::u-button
@@ -76,7 +76,7 @@ Integrate leasing and financing into your online store. Use our PHP SDK for cust
 How this documentation is organised
 
 #description
-This site focuses on two main areas: the PHP SDK for custom integrations and ready‑made ecommerce plugins for specific platforms. Use the sections below to understand how the pieces fit together.
+This site focuses on two main areas: the PHP SDK for custom integrations and ready‑made ecommerce integrations for specific platforms. Use the sections below to understand how the pieces fit together.
 
 #features
   :::u-page-feature
@@ -98,7 +98,7 @@ This site focuses on two main areas: the PHP SDK for custom integrations and rea
   Ecommerce integrations
 
   #description
-  See how to install, configure and update official plugins for PrestaShop, WooCommerce and Shoper, and how they use the same SDK under the hood.
+  See how to install, configure and update official integrations for PrestaShop, WooCommerce and Shoper, and how they use the same SDK under the hood.
   :::
 
   :::u-page-feature

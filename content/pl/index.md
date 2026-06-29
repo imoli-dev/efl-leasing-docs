@@ -1,7 +1,7 @@
 ---
 seo:
   title: EFL Leasing – PHP SDK i integracje ecommerce
-  description: Zintegruj leasing i finansowanie w swoim sklepie internetowym dzięki PHP SDK EFL Leasing oraz wtyczkom dla PrestaShop, WordPress i innych platform.
+  description: Zintegruj leasing i finansowanie w swoim sklepie internetowym dzięki PHP SDK EFL Leasing oraz integracjom dla PrestaShop, WordPress, Shoper i innych platform.
 ---
 
 ::u-page-hero{class="dark:bg-gradient-to-b from-neutral-900 to-neutral-950"}
@@ -13,10 +13,10 @@ reverse: false
 :hero-background
 
 #title
-[EFL Leasing]{.text-primary} – PHP SDK i wtyczki ecommerce
+[EFL Leasing]{.text-primary} – PHP SDK i integracje ecommerce
 
 #description
-Zintegruj leasing i finansowanie w swoim sklepie internetowym. Użyj naszego PHP SDK do własnych integracji lub wybierz gotową wtyczkę dla swojej platformy ecommerce.
+Zintegruj leasing i finansowanie w swoim sklepie internetowym. Użyj naszego PHP SDK do własnych integracji lub wybierz gotową integrację dla swojej platformy ecommerce.
 
 #links
   :::u-button
@@ -76,7 +76,7 @@ Zintegruj leasing i finansowanie w swoim sklepie internetowym. Użyj naszego PHP
 Jak zorganizowana jest ta dokumentacja
 
 #description
-Ta strona skupia się na dwóch głównych obszarach: PHP SDK do własnych integracji oraz gotowych wtyczkach ecommerce dla konkretnych platform. Poniższe sekcje pomogą zrozumieć, jak te elementy do siebie pasują.
+Ta strona skupia się na dwóch głównych obszarach: PHP SDK do własnych integracji oraz gotowych integracjach ecommerce dla konkretnych platform. Poniższe sekcje pomogą zrozumieć, jak te elementy do siebie pasują.
 
 #features
   :::u-page-feature
@@ -98,7 +98,7 @@ Ta strona skupia się na dwóch głównych obszarach: PHP SDK do własnych integ
   Integracje ecommerce
 
   #description
-  Zobacz, jak instalować, konfigurować i aktualizować oficjalne wtyczki dla PrestaShop, WooCommerce i Shoper oraz jak korzystają z tego samego SDK.
+  Zobacz, jak instalować, konfigurować i aktualizować oficjalne integracje dla PrestaShop, WooCommerce i Shoper oraz jak korzystają z tego samego SDK.
   :::
 
   :::u-page-feature
