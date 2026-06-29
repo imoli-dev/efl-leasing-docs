@@ -42,7 +42,11 @@ export default defineContentConfig({
       }
     }),
 
-    sdk_docs_en: defineCollection({
+    // External repositories currently ship docs in a single language only (no
+    // en/pl subfolders), so each source maps to one shared collection that is
+    // served under both locales. When real translations land in the repo, split
+    // these into per-locale collections via include/exclude on the subfolders.
+    sdk_docs: defineCollection({
       type: 'page',
       source: {
         repository: {
@@ -51,27 +55,12 @@ export default defineContentConfig({
           auth: githubAuth
         },
         include: 'docs/**',
-        exclude: 'docs/pl/**',
         prefix: '/sdk'
       },
       schema: sdkLinksSchema
     }),
 
-    sdk_docs_pl: defineCollection({
-      type: 'page',
-      source: {
-        repository: {
-          url: 'https://github.com/imoli-dev/efl-leasing-sdk',
-          branch: 'master',
-          auth: githubAuth
-        },
-        include: 'docs/pl/**',
-        prefix: '/sdk'
-      },
-      schema: sdkLinksSchema
-    }),
-
-    wordpress_docs_en: defineCollection({
+    wordpress_docs: defineCollection({
       type: 'page',
       source: {
         repository: {
@@ -80,20 +69,6 @@ export default defineContentConfig({
           auth: githubAuth
         },
         include: 'docs/**',
-        exclude: 'docs/pl/**',
-        prefix: '/wordpress-plugin'
-      }
-    }),
-
-    wordpress_docs_pl: defineCollection({
-      type: 'page',
-      source: {
-        repository: {
-          url: 'https://github.com/imoli-dev/efl-leasing-wp-plugin',
-          branch: 'master',
-          auth: githubAuth
-        },
-        include: 'docs/pl/**',
         prefix: '/wordpress-plugin'
       }
     })

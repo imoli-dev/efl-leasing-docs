@@ -1,12 +1,10 @@
 import type { Collections } from '@nuxt/content'
 import {
   defaultLocale,
-  docSources,
   getDocSourceById,
   getDocSourceCollection,
   getEditBaseUrl,
   getLocalizedSourceTo,
-  isLocale,
   stripLocaleFromPath,
   unwrapRootNavigation,
   withLocalePath,
@@ -154,26 +152,4 @@ export function buildEditPageLink(
     to: `${editBaseUrl}${pathSuffix}.md`,
     target: '_blank'
   }
-}
-
-function getRouteParam(value: unknown): string | undefined {
-  if (typeof value === 'string') {
-    return value
-  }
-
-  if (Array.isArray(value)) {
-    return value[0]
-  }
-
-  return undefined
-}
-
-export function validateDocRoute(route: { params: Record<string, unknown> }) {
-  const localeId = getRouteParam(route.params.locale)
-  const sourceId = getRouteParam(route.params.source)
-
-  return !!localeId
-    && isLocale(localeId)
-    && !!sourceId
-    && docSources.some(s => s.id === sourceId)
 }

@@ -3,15 +3,13 @@ import { findPageHeadline } from '@nuxt/content/utils'
 import {
   buildEditPageLink,
   loadDocPage,
-  useDocPageContext,
-  validateDocRoute
+  useDocPageContext
 } from '~/composables/useDocPage'
 import { isLocale } from '~/config/docs-sources'
 
 definePageMeta({
   layout: 'docs',
-  middleware: 'locale',
-  validate: validateDocRoute
+  middleware: 'locale'
 })
 
 const route = useRoute()

@@ -1,5 +1,5 @@
 /** Names of the page-type content collections defined in content.config.ts. */
-export type DocCollection = 'docs_en' | 'docs_pl' | 'sdk_docs_en' | 'sdk_docs_pl' | 'wordpress_docs_en' | 'wordpress_docs_pl'
+export type DocCollection = 'docs_en' | 'docs_pl' | 'sdk_docs' | 'wordpress_docs'
 
 export type Locale = 'en' | 'pl'
 
@@ -36,8 +36,8 @@ export const docSources: DocSource[] = [
     label: 'PHP SDK',
     prefix: '/sdk',
     collections: {
-      en: 'sdk_docs_en',
-      pl: 'sdk_docs_pl'
+      en: 'sdk_docs',
+      pl: 'sdk_docs'
     },
     icon: 'i-lucide-package',
     editBaseUrl: {
@@ -51,8 +51,8 @@ export const docSources: DocSource[] = [
     label: 'WordPress / WooCommerce Plugin',
     prefix: '/wordpress-plugin',
     collections: {
-      en: 'wordpress_docs_en',
-      pl: 'wordpress_docs_pl'
+      en: 'wordpress_docs',
+      pl: 'wordpress_docs'
     },
     icon: 'i-simple-icons-wordpress',
     editBaseUrl: {
