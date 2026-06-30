@@ -37,19 +37,10 @@ In both cases you can configure test credentials, verify the flow in a sandbox e
   :::card
   ---
   icon: i-simple-icons-prestashop
-  title: PrestaShop 8+ Module
+  title: PrestaShop Module
   to: /en/prestashop-module
   ---
-  PrestaShop 8+ module documentation with installation, configuration and usage guides.
-  :::
-
-  :::card
-  ---
-  icon: i-simple-icons-prestashop
-  title: PrestaShop 1.7 Module
-  to: /en/prestashop17-module
-  ---
-  PrestaShop 1.7 module documentation with installation, configuration and usage guides.
+  PrestaShop module documentation for 1.7 and 8+ with installation, configuration and usage guides.
   :::
 
   :::card
@@ -75,8 +66,7 @@ In both cases you can configure test credentials, verify the flow in a sandbox e
 
 You can integrate EFL Leasing with your store using one of the official integrations:
 
-- **PrestaShop 8+ module** – installable from your PrestaShop back office, adds EFL Leasing as a payment option and on product pages.
-- **PrestaShop 1.7 module** – dedicated build for shops still running PrestaShop 1.7.
+- **PrestaShop module** – installable from your PrestaShop back office for shops on 1.7 and 8+, adds EFL Leasing as a payment option and on product pages.
 - **WordPress / WooCommerce plugin** – ready‑to‑use plugin for WooCommerce‑based shops.
 - **Shoper application** – integration for Shoper‑based stores that exposes EFL Leasing in checkout and product views.
 

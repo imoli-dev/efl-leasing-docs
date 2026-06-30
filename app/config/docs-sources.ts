@@ -1,5 +1,5 @@
 /** Names of the page-type content collections defined in content.config.ts. */
-export type DocCollection = 'docs_en' | 'docs_pl' | 'sdk_docs_en' | 'sdk_docs_pl' | 'prestashop_docs' | 'prestashop17_docs' | 'wordpress_docs'
+export type DocCollection = 'docs_en' | 'docs_pl' | 'sdk_docs_en' | 'sdk_docs_pl' | 'prestashop_docs' | 'wordpress_docs'
 
 export type Locale = 'en' | 'pl'
 
@@ -61,8 +61,8 @@ export const docSources: DocSource[] = [
   {
     id: 'prestashop-module',
     labels: {
-      en: 'PrestaShop 8+ Module',
-      pl: 'Moduł PrestaShop 8+'
+      en: 'PrestaShop Module',
+      pl: 'Moduł PrestaShop'
     },
     prefix: '/prestashop-module',
     collections: {
@@ -76,25 +76,6 @@ export const docSources: DocSource[] = [
       pl: 'https://github.com/imoli-dev/efl-leasing-prestashop-module/edit/master/docs'
     },
     indexPath: '/prestashop-module'
-  },
-  {
-    id: 'prestashop17-module',
-    labels: {
-      en: 'PrestaShop 1.7 Module',
-      pl: 'Moduł PrestaShop 1.7'
-    },
-    prefix: '/prestashop17-module',
-    collections: {
-      en: 'prestashop17_docs',
-      pl: 'prestashop17_docs'
-    },
-    icon: 'i-simple-icons-prestashop',
-    contentLocale: 'pl',
-    editBaseUrl: {
-      en: 'https://github.com/imoli-dev/efl-leasing-prestashop17-module/edit/master/docs',
-      pl: 'https://github.com/imoli-dev/efl-leasing-prestashop17-module/edit/master/docs'
-    },
-    indexPath: '/prestashop17-module'
   },
   {
     id: 'wordpress-plugin',

@@ -130,22 +130,10 @@ You can start with a ready-made ecommerce integration or build a custom flow on 
   to: /en/prestashop-module
   ---
   #title
-  PrestaShop 8+ Module
+  PrestaShop Module
 
   #description
-  Native PrestaShop 8+ module that adds EFL Leasing as a payment method in your checkout and product pages. Configure limits, terms and display settings directly from your back office.
-  :::
-
-  :::u-page-feature
-  ---
-  icon: i-simple-icons-prestashop
-  to: /en/prestashop17-module
-  ---
-  #title
-  PrestaShop 1.7 Module
-
-  #description
-  Dedicated PrestaShop 1.7 module for shops that have not migrated yet. Adds EFL Leasing to checkout and product pages with the same leasing flow.
+  Native PrestaShop module for shops on 1.7 and 8+. Adds EFL Leasing as a payment method in your checkout and product pages. Configure limits, terms and display settings directly from your back office.
   :::
 
   :::u-page-feature

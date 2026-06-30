@@ -73,8 +73,6 @@ export default defineNuxtConfig({
         '/pl/sdk',
         '/en/prestashop-module',
         '/pl/prestashop-module',
-        '/en/prestashop17-module',
-        '/pl/prestashop17-module',
         '/en/wordpress-plugin',
         '/pl/wordpress-plugin'
       ],
@@ -147,17 +145,10 @@ export default defineNuxtConfig({
         ]
       },
       {
-        title: 'PrestaShop 8+ Module',
+        title: 'PrestaShop Module',
         contentCollection: 'prestashop_docs',
         contentFilters: [
           { field: 'path', operator: 'LIKE', value: '/prestashop-module%' }
-        ]
-      },
-      {
-        title: 'PrestaShop 1.7 Module',
-        contentCollection: 'prestashop17_docs',
-        contentFilters: [
-          { field: 'path', operator: 'LIKE', value: '/prestashop17-module%' }
         ]
       },
       {

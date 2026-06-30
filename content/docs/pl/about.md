@@ -37,19 +37,10 @@ W obu przypadkach możesz skonfigurować dane testowe, zweryfikować przepływ w
   :::card
   ---
   icon: i-simple-icons-prestashop
-  title: Moduł PrestaShop 8+
+  title: Moduł PrestaShop
   to: /pl/prestashop-module
   ---
-  Dokumentacja modułu PrestaShop 8+ z przewodnikami instalacji, konfiguracji i użytkowania.
-  :::
-
-  :::card
-  ---
-  icon: i-simple-icons-prestashop
-  title: Moduł PrestaShop 1.7
-  to: /pl/prestashop17-module
-  ---
-  Dokumentacja modułu PrestaShop 1.7 z przewodnikami instalacji, konfiguracji i użytkowania.
+  Dokumentacja modułu PrestaShop dla wersji 1.7 i 8+ z przewodnikami instalacji, konfiguracji i użytkowania.
   :::
 
   :::card
@@ -75,8 +66,7 @@ W obu przypadkach możesz skonfigurować dane testowe, zweryfikować przepływ w
 
 EFL Leasing możesz zintegrować ze sklepem za pomocą jednej z oficjalnych integracji:
 
-- **Moduł PrestaShop 8+** – instalowany z panelu PrestaShop, dodaje EFL Leasing jako metodę płatności i na stronach produktów.
-- **Moduł PrestaShop 1.7** – dedykowana wersja dla sklepów nadal działających na PrestaShop 1.7.
+- **Moduł PrestaShop** – instalowany z panelu PrestaShop dla sklepów na wersji 1.7 i 8+, dodaje EFL Leasing jako metodę płatności i na stronach produktów.
 - **Wtyczka WordPress / WooCommerce** – gotowe rozwiązanie dla sklepów opartych o WooCommerce.
 - **Aplikacja Shoper** – integracja dla sklepów Shoper z obsługą checkout i widoków produktów.
 

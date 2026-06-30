@@ -30,7 +30,6 @@ describe('docs-sources path helpers', () => {
   it('finds doc source from localized path', () => {
     expect(getDocSourceByPath('/pl/wordpress-plugin/setup')?.id).toBe('wordpress-plugin')
     expect(getDocSourceByPath('/en/prestashop-module/installation')?.id).toBe('prestashop-module')
-    expect(getDocSourceByPath('/pl/prestashop17-module/installation')?.id).toBe('prestashop17-module')
     expect(getDocSourceByLogicalPath('/sdk/guides/foo')?.id).toBe('sdk')
   })
 })

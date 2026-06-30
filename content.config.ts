@@ -70,8 +70,7 @@ export default defineContentConfig({
       schema: sdkLinksSchema
     }),
 
-    // PrestaShop repositories ship docs in a single language only, so each
-    // collection is shared under both locales until translated folders are added.
+    // PrestaShop docs ship in a single language and cover both 1.7 and 8+ builds.
     prestashop_docs: defineCollection({
       type: 'page',
       source: {
@@ -82,19 +81,6 @@ export default defineContentConfig({
         },
         include: 'docs/**',
         prefix: '/prestashop-module'
-      }
-    }),
-
-    prestashop17_docs: defineCollection({
-      type: 'page',
-      source: {
-        repository: {
-          url: 'https://github.com/imoli-dev/efl-leasing-prestashop17-module',
-          branch: 'master',
-          auth: githubAuth
-        },
-        include: 'docs/**',
-        prefix: '/prestashop17-module'
       }
     }),
 
